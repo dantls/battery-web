@@ -5,17 +5,26 @@ import {Container} from './styles';
 
 import closeImg from '../../assets/close.svg'
 import { api } from '../../services/api';
+import { useHistory } from 'react-router';
 Modal.setAppElement('#root');
 export function NewServiceModal({isOpen,onRequestClose }){
+
+  const history = useHistory();
   
   const [devices ,setDevices] = useState([]);
   const [choiseDevice ,setChoiseDevice] = useState('');
   const [batteries ,setBatteries] = useState([]);
-  const [choiseBatteries ,setChoiseBatteries] = useState('');
+  const [choiseBattery ,setChoiseBattery] = useState('');
 
 
-  function handleCreateNewService(event){
-    event.preventDefault();
+  async function handleCreateNewService(event){
+       event.preventDefault();
+       await api.post('/services',{
+         "device_id": choiseDevice,
+         "battery_id": choiseBattery,
+       });
+  
+    history.push('/home');
   }
 
   useEffect(()=>{
@@ -32,6 +41,7 @@ export function NewServiceModal({isOpen,onRequestClose }){
     loadDevices();
     loadBatteries();
   },[]);
+
   
   return(
     <Modal
@@ -75,7 +85,7 @@ export function NewServiceModal({isOpen,onRequestClose }){
                  <option 
                  key={item.id}
                  value={item.id}>
-                   {item.name}
+                   {`${item.code} - ${item.types.name} - ${item.modelos.name}`}
                 </option>
                 )
               })}
@@ -83,9 +93,9 @@ export function NewServiceModal({isOpen,onRequestClose }){
 
             <label htmlFor="modelo">Bateria* </label>
             <select 
-              value={choiseBatteries}
+              value={choiseBattery}
               onChange={event => {
-                setChoiseBatteries(event.target.value)
+                setChoiseBattery(event.target.value)
                 // models(event.target.value)
               }
               }>
@@ -101,13 +111,11 @@ export function NewServiceModal({isOpen,onRequestClose }){
                  <option 
                  key={item.id}
                  value={item.id}>
-                   {item.name}
+                   {`${item.code} - ${item.types.name} - ${item.modelos.name}`}
                 </option>
                 )
               })}
             </select>
-
-      
 
         <button type="submit">
           Cadastrar

@@ -12,7 +12,11 @@ import {Modelo} from './pages/Modelo';
 
 import {Type} from './pages/Type'; 
 
+import {Status} from './pages/Status'; 
+
 import {Device} from './pages/Device';
+
+import {Battery} from './pages/Battery';
 
 export default function Routes(){
     return(
@@ -31,6 +35,12 @@ export default function Routes(){
                 </Route>
                 <Route path="/types">
                     <Type />
+                </Route>
+                <Route path="/status">
+                    <Status />
+                </Route>
+                <Route path="/batteries">
+                    <Battery />
                 </Route>
             </Switch>
 
