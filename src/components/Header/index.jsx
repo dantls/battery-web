@@ -16,10 +16,11 @@ export function Header({onPropsNewServiceModal}){
             <li><Link to="/models">Modelo</Link></li>
             <li><Link to="/types">Tipo</Link></li>
             <li><Link to="/brands">Marca</Link></li>
+            <li><Link to="/status">Status</Link></li>
           </nav>
           <button 
-          type="button"
-          onClick={onPropsNewServiceModal}
+            type="button"
+            onClick={onPropsNewServiceModal}
           >
             Novo serviço
           </button> 
