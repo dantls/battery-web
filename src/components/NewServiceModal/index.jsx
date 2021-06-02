@@ -25,6 +25,7 @@ export function NewServiceModal({isOpen,onRequestClose }){
        });
   
     history.push('/home');
+    onRequestClose()
   }
 
   useEffect(()=>{
@@ -40,7 +41,10 @@ export function NewServiceModal({isOpen,onRequestClose }){
     
     loadDevices();
     loadBatteries();
-  },[]);
+    setChoiseDevice('');
+    setChoiseBattery('');
+    
+  },[isOpen]);
 
   
   return(
