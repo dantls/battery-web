@@ -23,6 +23,9 @@ export const Container = styled.div`
       &:first-child{
         color: var(--text-title);
       }
+      &:last-child{
+        color: var(--text-title);
+      }
     }
   }
 

@@ -38,7 +38,6 @@ import {Form,Container} from './styles';
       loadTypes();
       loadStatus();
 
-
   },[]);
 
 
@@ -106,6 +105,7 @@ import {Form,Container} from './styles';
             <label htmlFor="modelo">Modelo* </label>
             <select 
               value={choiseModel}
+              disabled={!modelo.length} 
               onChange={event =>setChoiseModel(event.target.value)}
             >
               <option

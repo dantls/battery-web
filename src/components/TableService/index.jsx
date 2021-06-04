@@ -1,15 +1,14 @@
 import { api } from '../../services/api';
 import { Container } from './styles';
+import {useEffect , useState} from 'react';
 
 export function TableService(){
-  const [services, setNewServices] = useState([]);
+ const [services, setNewServices] = useState([]);
 
   useEffect(()=>{
-    api.get('devices')
+    api.get('services')
     .then(response => setNewServices(response.data))
   },[])
-
-  console.log(services)
 
   return(
     <Container>
@@ -17,31 +16,31 @@ export function TableService(){
         <thead>
           <tr>
             <th>Código</th>
-            <th>Modelo</th>
-            <th>Data</th>
+            <th>Equipamento</th>
+            <th>Bateria</th>
+            <th>Data Inicial</th>
             <th>Status</th>
           </tr>
         </thead>
 
         <tbody>
-          <tr>
-            <td>001</td>
-            <td>FGK</td>
-            <td>20/02/2021</td>
-            <td>Em Uso</td>
-          </tr>
-          <tr>
-            <td>003</td>
-            <td>FGG</td>
-            <td>21/02/2021</td>
-            <td>Em Uso</td>
-          </tr>
-          <tr>
-            <td>006</td>
-            <td>FGK</td>
-            <td>20/02/2021</td>
-            <td>Em Uso</td>
-          </tr>
+
+          {services.map( item => (
+            <tr key={item.id}>
+            <td>{item.id}</td>
+            <td>{item.devices.code}</td>
+            <td>{item.batteries.code}</td>
+            <td>
+              {/* {new Intl.DateTimeFormat('pt-BR')
+                .format(new Date(item.initial_date))
+              } */}
+              {new Date(item.initial_date).toLocaleString('pt-BR')}
+            </td>
+            <td>{item.status.name}</td>
+            </tr>
+          ))}
+         
+        
         </tbody>
 
       </table>

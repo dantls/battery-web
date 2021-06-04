@@ -23,7 +23,7 @@ export function NewServiceModal({isOpen,onRequestClose }){
          "device_id": choiseDevice,
          "battery_id": choiseBattery,
        });
-  
+
     history.push('/home');
     onRequestClose()
   }

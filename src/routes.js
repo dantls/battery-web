@@ -18,6 +18,8 @@ import {Device} from './pages/Device';
 
 import {Battery} from './pages/Battery';
 
+import {Service} from './pages/Service';
+
 export default function Routes(){
     return(
             <Switch>
@@ -41,6 +43,9 @@ export default function Routes(){
                 </Route>
                 <Route path="/batteries">
                     <Battery />
+                </Route>
+                <Route path="/services">
+                    <Service />
                 </Route>
             </Switch>
 

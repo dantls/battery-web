@@ -17,6 +17,7 @@ export function Header({onPropsNewServiceModal}){
             <li><Link to="/types">Tipo</Link></li>
             <li><Link to="/brands">Marca</Link></li>
             <li><Link to="/status">Status</Link></li>
+            <li><Link to="/services">Serviços</Link></li>
           </nav>
           <button 
             type="button"
