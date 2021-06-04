@@ -1,5 +1,6 @@
 import { useState,useEffect} from 'react';
 import { useHistory } from 'react-router';
+import { Select } from '../../components/Select';
 import {api} from '../../services/api';
 import {Form,Container} from './styles';
 
@@ -79,7 +80,11 @@ import {Form,Container} from './styles';
           />
 
             <label htmlFor="name">Marca* </label>
-            <select 
+
+            <Select 
+              options={brand}
+            />
+            {/* <select 
               value={choiseBrand}
               onChange={event => {
                 setChoiseBrand(event.target.value)
@@ -102,7 +107,7 @@ import {Form,Container} from './styles';
                 </option>
                 )
               })}
-            </select>
+            </select> */}
 
             <label htmlFor="modelo">Modelo* </label>
             <select 
