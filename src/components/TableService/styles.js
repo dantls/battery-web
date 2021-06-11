@@ -18,12 +18,14 @@ export const Container = styled.div`
       border:0;
       background-color: var(--shape);
       color: var(--text-body);
-      border-radius: 0.25rem;
+      border-radius: 0rem;
 
       &:first-child{
+        border-radius: 0.25rem 0 0 0.25rem;
         color: var(--text-title);
       }
       &:last-child{
+        border-radius: 0 0.25rem 0.25rem 0 ;
         color: var(--text-title);
       }
     }

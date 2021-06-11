@@ -24,7 +24,7 @@ export function NewServiceModal({isOpen,onRequestClose }){
          "battery_id": choiseBattery,
        });
 
-    history.push('/home');
+    history.push('/services');
     onRequestClose()
   }
 

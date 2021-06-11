@@ -1,8 +1,6 @@
 import styled from 'styled-components';
 
-
 export const Container = styled.form`
-  height: 30rem;
 
   h2{
     color: var(--text-title);
@@ -29,10 +27,6 @@ export const Container = styled.form`
       color: var(--text-body)
     }
 
-    & + input {
-      margin-top: 2rem;
-    }
-    
   }
   button[type="submit"]{
       width: 100%;
