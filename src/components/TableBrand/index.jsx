@@ -1,6 +1,6 @@
 import { Container } from './styles';
 
-export function TableBrand({handleEdit,brands,setSelectedBrand}){
+export function TableBrand({handleEdit, handleDelete,brands,setSelectedBrand}){
 
   return(
     <Container>
@@ -21,14 +21,25 @@ export function TableBrand({handleEdit,brands,setSelectedBrand}){
               <td>{item.name}</td>        
               <td>
               <button
+                  className="edit"
                   onClick={() => {
                     handleEdit(item.id)
                     setSelectedBrand(item)
                     }
                   }      
               >
-                    Editar
-                  </button>  
+                Editar
+              </button>  
+              <button
+                  className="delete"
+                  onClick={() => {
+                    handleDelete(item.id)
+                    setSelectedBrand(item)
+                    }
+                  }      
+              >
+                Delete
+              </button>  
               </td>        
             </tr>
           ))}

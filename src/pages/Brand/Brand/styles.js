@@ -1,9 +1,23 @@
 import styled from 'styled-components';
 
 export const Container = styled.main`
+  display: flex;
+  flex-direction: row;
   max-width: 1120px;
   margin: 0 auto;
   padding: 2.5rem 1rem;
+
+  button{
+    border: 0;
+   
+    height:3rem;
+
+    transition: filter 0.2s;
+
+    &:hover{
+      filter: brightness(0.9);
+    }
+  }
 `;
 
 export const Form = styled.form`

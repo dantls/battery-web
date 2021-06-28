@@ -3,7 +3,7 @@ import { Container, Content } from './styles';
 import { Link } from 'react-router-dom';
 
 
-export function Header({onPropsNewServiceModal}){
+export function Header({onPropsNewServiceModal,setIsAdding }){
   return(
     <Container>
       <Content>
@@ -15,7 +15,13 @@ export function Header({onPropsNewServiceModal}){
             <li><Link to="/batteries">Bateria</Link></li>
             <li><Link to="/models">Modelo</Link></li>
             <li><Link to="/types">Tipo</Link></li>
-            <li><Link to="/brands">Marca</Link></li>
+            <li><Link to="/brands/view">Marca</Link>
+              {/* <ul>
+                <li>
+                  <button onClick={() => setIsAdding(true)}>Novo</button>
+                </li>
+              </ul> */}
+            </li>
             <li><Link to="/status">Status</Link></li>
             <li><Link to="/services">Serviços</Link></li>
           </nav>

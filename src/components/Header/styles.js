@@ -37,6 +37,8 @@ export const Content = styled.div`
     align-items: center;
   }
   nav{
+      
+
       display: flex;
       list-style: none;
       margin-right: 1.5rem;
@@ -45,7 +47,26 @@ export const Content = styled.div`
         padding: 1rem;
         text-decoration: none;
         color: var(--shape);
+
       }
+      /* li{
+        position: relative;
+      }
+
+      li ul{
+        position:absolute;
+        top:30px;
+        left:0;
+        display:none;
+      }
+      li:hover ul, li.over ul{
+        display:block;
+      }
+
+      li ul li{
+        display:block;
+      } */
+
   }
 
   @media(max-width:820px){

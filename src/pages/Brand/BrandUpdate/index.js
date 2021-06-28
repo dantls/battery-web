@@ -1,26 +1,40 @@
-import { useEffect, useState} from 'react';
-import { useHistory, useParams } from 'react-router-dom';
+import { useState } from 'react';
 import { api } from '../../../services/api';
 import { Container, Form } from "./styles";
 
-export default function BrandUpdate({}){
-    const history = useHistory();
-    const [ name ,setName] = useState('');
-  
-    async function handleSubmit(event){
+export default function BrandUpdate({
+  brands, selectedBrand, setBrands, setIsEditing
+}){
+    const [name, setName] = useState(selectedBrand.name);
+    
+    const id = selectedBrand.id;
+
+    async function handleUpdate(event){
         event.preventDefault();
+          
+        const brand = {
+          id,
+          name
+        }
+
+        const brandUpdated = await api.put('/brands', brand );
         
-        await api.post('/brands', {
-           name 
-        });
-        history.push('/models');
+
+        const brandsUpdated = brands.map(brand =>
+          brand.id !== brandUpdated.data.id ? brand : brandUpdated.data,
+        );
+
+        setBrands([...brandsUpdated]);
+
+
+        setIsEditing(false);
     }
 
 
     return ( 
        
         <Container>
-          <Form onSubmit = {handleSubmit}>
+          <Form onSubmit = {handleUpdate}>
             <label htmlFor="name"> Marca * </label>
             <input 
               type="text" 

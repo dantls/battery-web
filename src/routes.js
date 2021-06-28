@@ -6,7 +6,7 @@ import {
 } from 'react-router-dom';
 
 import BrandCreate from './pages/Brand/BrandCreate';
-import BrandView from './pages/Brand/BrandView';
+import Brand from './pages/Brand/Brand';
 import BrandUpdate from './pages/Brand/BrandUpdate';
 
 import {Home} from './pages/Home';
@@ -40,7 +40,7 @@ export default function Routes(){
                     <BrandUpdate />
                 </Route>
                 <Route path="/brands/view">
-                    <BrandView />
+                    <Brand />
                 </Route>
 
                 <Route path="/models">
