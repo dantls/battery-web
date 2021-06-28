@@ -1,9 +1,9 @@
 import { useState} from 'react';
 import { useHistory } from 'react-router-dom';
-import { api } from '../../services/api';
+import {api} from '../../../services/api';
 import { Container, Form } from "./styles";
 
-export default function Brand(){
+export default function BrandCreate(){
     const history = useHistory();
     const [name ,setName] = useState('');
 

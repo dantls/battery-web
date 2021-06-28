@@ -2,9 +2,12 @@ import React from 'react';
 
 import {
     Switch
-    ,Route } from 'react-router-dom';
+    ,Route 
+} from 'react-router-dom';
 
-import Brand from './pages/Brand';
+import BrandCreate from './pages/Brand/BrandCreate';
+import BrandView from './pages/Brand/BrandView';
+import BrandUpdate from './pages/Brand/BrandUpdate';
 
 import {Home} from './pages/Home';
 
@@ -29,9 +32,17 @@ export default function Routes(){
                 <Route path="/devices">
                     <Device />
                 </Route>
-                <Route path="/brands">
-                    <Brand />
+
+                <Route path="/brands/create">
+                    <BrandCreate />
                 </Route>
+                <Route path="/brands/update/:id">
+                    <BrandUpdate />
+                </Route>
+                <Route path="/brands/view">
+                    <BrandView />
+                </Route>
+
                 <Route path="/models">
                     <Modelo />
                 </Route>

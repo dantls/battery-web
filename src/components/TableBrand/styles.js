@@ -1,0 +1,39 @@
+import styled from 'styled-components';
+
+export const Container = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+ 
+  table{
+    width: 60%;
+
+    border-spacing: 0 0.5rem;
+
+    th{
+      color: var(--text-body);
+      font-weight: 400;
+      padding: 1rem 2rem;
+      text-align: left;
+      line-height: 1.5rem;
+    }
+    td{
+      padding: 1rem 2rem;
+      border:0;
+      background-color: var(--shape);
+      color: var(--text-body);
+      border-radius: 0rem;
+
+      &:first-child{
+        border-radius: 0.25rem 0 0 0.25rem;
+        color: var(--text-title);
+      }
+      &:last-child{
+        border-radius: 0 0.25rem 0.25rem 0 ;
+        color: var(--text-title);
+      }
+    }
+  }
+
+`;
