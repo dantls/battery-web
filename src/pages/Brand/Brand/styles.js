@@ -5,14 +5,14 @@ export const Container = styled.main`
   flex-direction: row;
   max-width: 1120px;
   margin: 0 auto;
-  padding: 2.5rem 1rem;
+  padding: 2.5rem 2rem;
+  justify-content: space-around;
 
   button{
     border: 0;
    
     height:3rem;
-
-    transition: filter 0.2s;
+    background-color: transparent;
 
     &:hover{
       filter: brightness(0.9);
@@ -21,7 +21,7 @@ export const Container = styled.main`
 `;
 
 export const Form = styled.form`
-  max-width: 20rem;
+  max-width: 100%;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
