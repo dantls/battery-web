@@ -3,14 +3,14 @@ import { useHistory } from 'react-router-dom';
 import {api} from '../../../services/api';
 import { Container, Form } from "./styles";
 
-export default function StatusCreate(){
+export default function TypeCreate(){
     const history = useHistory();
     const [name ,setName] = useState('');
 
     async function handleSubmit(event){
         event.preventDefault();
         
-        await api.post('/status', {
+        await api.post('/types', {
            name 
         });
         history.push('/');
@@ -19,11 +19,11 @@ export default function StatusCreate(){
        
         <Container>
           <Form onSubmit = {handleSubmit}>
-            <label htmlFor="name"> Status * </label>
+            <label htmlFor="name"> Tipo do equipamento * </label>
             <input 
               type="text" 
               id="name" 
-              placeholder="Situação"
+              placeholder="Tipo do equipamento"
               value={name}
               onChange={event => {
                   setName(event.target.value)

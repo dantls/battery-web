@@ -2,29 +2,29 @@ import { useState } from 'react';
 import { api } from '../../../services/api';
 import { Container, Form } from "./styles";
 
-export default function StatusUpdate({
-  status, selectedStatus, setStatus, setIsEditing
+export default function TypeUpdate({
+  types, selectedType, setTypes, setIsEditing
 }){
-    const [name, setName] = useState(selectedStatus.name);
+    const [name, setName] = useState(selectedType.name);
     
-    const id = selectedStatus.id;
+    const id = selectedType.id;
 
     async function handleUpdate(event){
         event.preventDefault();
           
-        const itemStatus = {
+        const type = {
           id,
           name
         }
 
-        const itemUpdated = await api.put('/status', itemStatus );
+        const typeUpdated = await api.put('/types', type );
         
 
-        const itemsUpdated = status.map(item =>
-          item.id !== itemUpdated.data.id ? item : itemUpdated.data,
+        const typesUpdated = types.map(type =>
+          type.id !== typeUpdated.data.id ? type : typeUpdated.data,
         );
 
-        setStatus([...itemsUpdated]);
+        setTypes([...typesUpdated]);
 
 
         setIsEditing(false);
@@ -35,11 +35,11 @@ export default function StatusUpdate({
        
         <Container>
           <Form onSubmit = {handleUpdate}>
-            <label htmlFor="name"> Status * </label>
+            <label htmlFor="name"> Tipo do equipamento * </label>
             <input 
               type="text" 
               id="name" 
-              placeholder="Situação"
+              placeholder="Tipo do equipamento"
               value={name}
               onChange={event => {
                   setName(event.target.value)

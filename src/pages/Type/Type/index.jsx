@@ -1,36 +1,36 @@
 import { Container} from "./styles";
-import {TableStatus} from '../../../components/TableStatus';
+import {TableType} from '../../../components/TableType';
 import { useEffect, useState } from "react";
 import { api } from '../../../services/api';
 import Swal from 'sweetalert2';
 
 import { BsPlusCircle} from "react-icons/bs";
 
-import StatusCreate from '../StatusCreate';
-import StatusUpdate from '../StatusUpdate';
+import TypeCreate from '../TypeCreate';
+import TypeUpdate from '../TypeUpdate';
 
-export default function Status(){
+export default function Type(){
 
-  const [status, setStatus] = useState([]);
-  const [selectedStatus, setSelectedStatus] = useState(null);
+  const [types, setTypes] = useState([]);
+  const [selectedType, setSelectedType] = useState(null);
   const [isAdding, setIsAdding] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
 
   useEffect(()=>{
-    async function loadStatus(){
+    async function loadTypes(){
       
-      const response = await api.get(`/status`);
+      const response = await api.get(`/types`);
       
-        setStatus(response.data)
+        setTypes(response.data)
     }
 
-    loadStatus();
+    loadTypes();
   },[])
 
 
   const handleEdit = id => {
-    const [item] = status.filter(item => item.id === id);
-    setSelectedStatus(item);
+    const [type] = types.filter(type => type.id === id);
+    setSelectedType(type);
     setIsEditing(true);
   };
   const handleDelete = (id) => {
@@ -51,9 +51,9 @@ export default function Status(){
           timer: 1500
         });
 
-        api.delete(`/status/${id}`);
+        api.delete(`/types/${id}`);
         
-        setStatus(status.filter(item => item.id !== id));
+        setTypes(types.filter(type => type.id !== id));
       }
     });
   };
@@ -63,11 +63,11 @@ export default function Status(){
       <Container>
         {!isAdding && !isEditing && (
           <>
-            <TableStatus
-              status={status}
+            <TableType
+              types={types}
               handleEdit={handleEdit}
               handleDelete={handleDelete}
-              setSelectedStatus={setSelectedStatus}
+              setSelectedType={setSelectedType}
             />
             <button onClick={() => setIsAdding(true)}>
               <BsPlusCircle
@@ -79,22 +79,23 @@ export default function Status(){
           )
         }
         {isAdding && (
-            <StatusCreate
-              status={status}
-              setStatus={setStatus}
+            <TypeCreate
+              types={types}
+              setTypes={setTypes}
               setIsAdding={setIsAdding}
             />
           )
         }
         {isEditing && (
-            <StatusUpdate
-              status={status}
-              selectedStatus={selectedStatus}
-              setStatus={setStatus}
+            <TypeUpdate
+              types={types}
+              selectedType={selectedType}
+              setTypes={setTypes}
               setIsEditing={setIsEditing}
             />
           )
         }
+     
         </Container>
     )
 

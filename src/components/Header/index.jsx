@@ -14,7 +14,7 @@ export function Header({onPropsNewServiceModal,setIsAdding }){
             <li><Link to="/devices">Dispositivo</Link></li>
             <li><Link to="/batteries">Bateria</Link></li>
             <li><Link to="/models">Modelo</Link></li>
-            <li><Link to="/types">Tipo</Link></li>
+            <li><Link to="/types/view">Tipo</Link></li>
             <li><Link to="/brands/view">Marca</Link>
               {/* <ul>
                 <li>
@@ -22,7 +22,7 @@ export function Header({onPropsNewServiceModal,setIsAdding }){
                 </li>
               </ul> */}
             </li>
-            <li><Link to="/status">Status</Link></li>
+            <li><Link to="/status/view">Status</Link></li>
             <li><Link to="/services">Serviços</Link></li>
           </nav>
           <button 
