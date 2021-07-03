@@ -9,13 +9,15 @@ import BrandCreate from './pages/Brand/BrandCreate';
 import Brand from './pages/Brand/Brand';
 import BrandUpdate from './pages/Brand/BrandUpdate';
 
+import StatusCreate from './pages/Status/StatusCreate';
+import Status from './pages/Status/Status';
+import StatusUpdate from './pages/Status/StatusUpdate';
+
 import {Home} from './pages/Home';
 
 import {Modelo} from './pages/Modelo';
 
 import {Type} from './pages/Type'; 
-
-import {Status} from './pages/Status'; 
 
 import {Device} from './pages/Device';
 
@@ -41,6 +43,10 @@ export default function Routes(){
                 </Route>
                 <Route path="/brands/view">
                     <Brand />
+                </Route>
+
+                <Route path="/status/view">
+                    <Status />
                 </Route>
 
                 <Route path="/models">

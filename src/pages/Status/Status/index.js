@@ -1,36 +1,36 @@
 import { Container} from "./styles";
-import {TableBrand} from '../../../components/TableBrand';
+import {TableStatus} from '../../../components/TableStatus';
 import { useEffect, useState } from "react";
 import { api } from '../../../services/api';
 import Swal from 'sweetalert2';
 
 import { BsPlusCircle} from "react-icons/bs";
 
-import BrandCreate from '../BrandCreate';
-import BrandUpdate from '../BrandUpdate';
+import StatusCreate from '../StatusCreate';
+import StatusUpdate from '../StatusUpdate';
 
-export default function Brand(){
+export default function Status(){
 
-  const [brands, setBrands] = useState([]);
-  const [selectedBrand, setSelectedBrand] = useState(null);
+  const [status, setStatus] = useState([]);
+  const [selectedStatus, setSelectedStatus] = useState(null);
   const [isAdding, setIsAdding] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
 
   useEffect(()=>{
-    async function loadBrands(){
+    async function loadStatus(){
       
-      const response = await api.get(`/brands`);
+      const response = await api.get(`/status`);
       
-        setBrands(response.data)
+        setStatus(response.data)
     }
 
-    loadBrands();
+    loadStatus();
   },[])
 
 
   const handleEdit = id => {
-    const [brand] = brands.filter(brand => brand.id === id);
-    setSelectedBrand(brand);
+    const [status] = status.filter(status => status.id === id);
+    setSelectedStatus(status);
     setIsEditing(true);
   };
   const handleDelete = (id) => {
@@ -51,9 +51,9 @@ export default function Brand(){
           timer: 1500
         });
 
-        api.delete(`/brands/${id}`);
+        api.delete(`/status/${id}`);
         
-        setBrands(brands.filter(brand => brand.id !== id));
+        setStatus(status.filter(status => status.id !== id));
       }
     });
   };
@@ -63,11 +63,11 @@ export default function Brand(){
       <Container>
         {!isAdding && !isEditing && (
           <>
-            <TableBrand 
-              brands={brands}
+            <TableStatus
+              status={status}
               handleEdit={handleEdit}
               handleDelete={handleDelete}
-              setSelectedBrand={setSelectedBrand}
+              setSelectedStatus={setSelectedStatus}
             />
             <button onClick={() => setIsAdding(true)}>
               <BsPlusCircle
@@ -79,25 +79,22 @@ export default function Brand(){
           )
         }
         {isAdding && (
-            <BrandCreate
-              brands={brands}
-              setBrands={setBrands}
+            <StatusCreate
+              status={status}
+              setStatus={setStatus}
               setIsAdding={setIsAdding}
             />
           )
         }
         {isEditing && (
-            <BrandUpdate
-              brands={brands}
-              selectedBrand={selectedBrand}
-              setBrands={setBrands}
+            <StatusUpdate
+              status={status}
+              selectedStatus={selectedStatus}
+              setStatus={setStatus}
               setIsEditing={setIsEditing}
             />
           )
         }
-
-
-          
         </Container>
     )
 
