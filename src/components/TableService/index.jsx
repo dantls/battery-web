@@ -1,14 +1,7 @@
-import { api } from '../../services/api';
+
 import { Container } from './styles';
-import {useEffect , useState} from 'react';
 
-export function TableService(){
- const [services, setNewServices] = useState([]);
-
-  useEffect(()=>{
-    api.get('services')
-    .then(response => setNewServices(response.data))
-  },[])
+export function TableService({services}){
 
   return(
     <Container>

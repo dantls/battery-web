@@ -18,6 +18,22 @@ export const Form = styled.form`
     font-size: 1.5rem;
     margin-bottom: 2rem;
   }
+  select{
+    width: 100%;
+    padding: 0 1.5rem;
+    height: 4rem;
+    border-radius: 0.25rem;
+
+    border: 1px solid var(--input-border);
+    background-color: var(--input-color);
+
+    font-weight: 400;
+    font-size: 1rem;
+
+    margin-bottom: 1rem;
+   
+  }
+
   input{
     width: 100%;
     padding: 0 1.5rem;

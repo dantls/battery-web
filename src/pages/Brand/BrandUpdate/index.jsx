@@ -17,7 +17,7 @@ export default function BrandUpdate({
           name
         }
 
-        const brandUpdated = await api.put('/brands', brand );
+        const brandUpdated = await api.put(`/brands/${id}`, brand );
         
 
         const brandsUpdated = brands.map(brand =>

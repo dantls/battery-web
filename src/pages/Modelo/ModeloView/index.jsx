@@ -1,36 +1,35 @@
 import { Container} from "./styles";
-import {TableType} from '../../../components/TableType';
+import {TableModelo} from '../../../components/TableModelo';
 import { useEffect, useState } from "react";
 import { api } from '../../../services/api';
 import Swal from 'sweetalert2';
 
 import { BsPlusCircle} from "react-icons/bs";
 
-import TypeCreate from '../TypeCreate';
-import TypeUpdate from '../TypeUpdate';
+import ModeloCreate from '../ModeloCreate';
+import ModeloUpdate from '../ModeloUpdate';
 
-export default function Type(){
+export default function ModeloView(){
 
-  const [types, setTypes] = useState([]);
-  const [selectedType, setSelectedType] = useState(null);
+  const [modelos, setModelos] = useState([]);
+  const [selectedModelo, setSelectedModelo] = useState(null);
   const [isAdding, setIsAdding] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
 
   useEffect(()=>{
-    async function loadTypes(){
+    async function loadModelos(){
       
-      const response = await api.get(`/types`);
+      const response = await api.get(`/models`);
       
-        setTypes(response.data)
+        setModelos(response.data)
     }
 
-    loadTypes();
+    loadModelos();
   },[])
 
-
   const handleEdit = id => {
-    const [type] = types.filter(type => type.id === id);
-    setSelectedType(type);
+    const [modelo] = modelos.filter(modelo => modelo.id === id);
+    setSelectedModelo(modelo);
     setIsEditing(true);
   };
   const handleDelete = (id) => {
@@ -51,9 +50,9 @@ export default function Type(){
           timer: 1500
         });
 
-        api.delete(`/types/${id}`);
+        api.delete(`/models/${id}`);
         
-        setTypes(types.filter(type => type.id !== id));
+        setModelos(modelos.filter(modelo => modelo.id !== id));
       }
     });
   };
@@ -63,11 +62,11 @@ export default function Type(){
       <Container>
         {!isAdding && !isEditing && (
           <>
-            <TableType
-              types={types}
+            <TableModelo
+              modelos={modelos}
               handleEdit={handleEdit}
               handleDelete={handleDelete}
-              setSelectedType={setSelectedType}
+              setSelectedModelo={setSelectedModelo}
             />
             <button onClick={() => setIsAdding(true)}>
               <BsPlusCircle
@@ -79,23 +78,25 @@ export default function Type(){
           )
         }
         {isAdding && (
-            <TypeCreate
-              types={types}
-              setTypes={setTypes}
+            <ModeloCreate
+              modelos={modelos}
+              setModelos={setModelos}
               setIsAdding={setIsAdding}
             />
           )
         }
         {isEditing && (
-            <TypeUpdate
-              types={types}
-              selectedType={selectedType}
-              setTypes={setTypes}
+            <ModeloUpdate
+              modelos={modelos}
+              selectedModelo={selectedModelo}
+              setModelos={setModelos}
               setIsEditing={setIsEditing}
             />
           )
         }
-     
+
+
+          
         </Container>
     )
 

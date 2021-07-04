@@ -13,7 +13,7 @@ export default function BrandCreate(){
         await api.post('/brands', {
            name 
         });
-        history.push('/models');
+        history.push('/');
     }
     return ( 
        

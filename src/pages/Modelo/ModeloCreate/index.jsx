@@ -1,35 +1,33 @@
-import React, { useState,useEffect} from 'react';
-import { useHistory } from 'react-router';
-import {api} from '../../services/api';
-import {Form, Container} from './styles';
+import { useState,useEffect} from 'react';
+import { useHistory } from 'react-router-dom';
+import {api} from '../../../services/api';
+import { Container, Form } from "./styles";
 
- export function Modelo(){
-    const history = useHistory();  
-
-    const [brand ,setBrand] = useState([]);
-    const [modelo ,setModelo] = useState('');
+export default function ModeloCreate(){
+    const history = useHistory();
+    const [brands ,setBrands] = useState([]);
+    const [name ,setName] = useState('');
     const [choiseBrand ,setChoiseBrand] = useState('');
 
     useEffect(()=>{
       async function loadBrands(){
         const response = await api.get('brands');
-        setBrand(response.data);
+        setBrands(response.data);
       }
       loadBrands();
-  },[]);
-
-  
-   async function handleSubmit(event){
-      event.preventDefault();
-
-      await api.post('/models',{"name":modelo, "brand_id":choiseBrand});
+    },[]);
 
 
-      history.push('/home');
-    }
+    async function handleSubmit(event){
+        event.preventDefault();
     
+        await api.post('/models',{name, "brand_id":choiseBrand});
+
+        history.push('/');
+    }
     return ( 
-        <Container>
+       
+         <Container>
           <Form onSubmit = {handleSubmit}>
 
             <label htmlFor="name"> Marca * </label>
@@ -48,7 +46,7 @@ import {Form, Container} from './styles';
                   Selecione a marca:
               </option>
               {
-                brand.map(
+                brands.map(
                   (item) => {
                     return (
                       <option 
@@ -61,23 +59,25 @@ import {Form, Container} from './styles';
                 )
               }
             </select>
-          
-            <label htmlFor="Modelo"> Modelo * </label>
+         
+            <label htmlFor="name"> Modelo * </label>
             <input 
               type="text" 
-              id="modelo" 
+              id="name" 
               placeholder="Modelo do equipamento"
-              value={modelo}
-              onChange={event =>{
-                setModelo(event.target.value)
-              }
+              value={name}
+              onChange={event => {
+                  setName(event.target.value)
+                }
               }
             />
-            <button className="btn"type="submit">Salvar</button>
+        
+    
+            <button className= "btn"type="submit">Salvar</button>
+    
     
           </Form>
         </Container>
-        
-        )
+    )
 
 }

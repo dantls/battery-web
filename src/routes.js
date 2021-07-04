@@ -6,21 +6,22 @@ import {
 } from 'react-router-dom';
 
 import BrandCreate from './pages/Brand/BrandCreate';
-import Brand from './pages/Brand/Brand';
+import BrandView from './pages/Brand/BrandView';
 import BrandUpdate from './pages/Brand/BrandUpdate';
 
 import StatusCreate from './pages/Status/StatusCreate';
-import Status from './pages/Status/Status';
+import StatusView from './pages/Status/StatusView';
 import StatusUpdate from './pages/Status/StatusUpdate';
 
 import TypeCreate from './pages/Type/TypeCreate';
-import Type from './pages/Type/Type';
+import TypeView from './pages/Type/TypeView';
 import TypeUpdate from './pages/Type/TypeUpdate';
 
+import ModeloCreate from './pages/Modelo/ModeloCreate';
+import ModeloView from './pages/Modelo/ModeloView';
+import ModeloUpdate from './pages/Modelo/ModeloUpdate';
+
 import {Home} from './pages/Home';
-
-import {Modelo} from './pages/Modelo';
-
 
 import {Device} from './pages/Device';
 
@@ -45,7 +46,7 @@ export default function Routes(){
                     <BrandUpdate />
                 </Route>
                 <Route path="/brands/view">
-                    <Brand />
+                    <BrandView />
                 </Route>
 
 
@@ -56,7 +57,7 @@ export default function Routes(){
                     <StatusUpdate />
                 </Route>
                 <Route path="/status/view">
-                    <Status />
+                    <StatusView />
                 </Route>
 
                 <Route path="/types/create">
@@ -66,18 +67,22 @@ export default function Routes(){
                     <TypeUpdate />
                 </Route>
                 <Route path="/types/view">
-                    <Type />
+                    <TypeView />
+                </Route>
+
+                <Route path="/models/create">
+                    <ModeloCreate />
+                </Route>
+                <Route path="/models/update/:id">
+                    <ModeloUpdate />
+                </Route>
+                <Route path="/models/view">
+                    <ModeloView />
                 </Route>
 
             
 
-                <Route path="/models">
-                    <Modelo />
-                </Route>
                
-                <Route path="/status">
-                    <Status />
-                </Route>
                 <Route path="/batteries">
                     <Battery />
                 </Route>

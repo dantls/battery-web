@@ -17,7 +17,7 @@ export default function TypeUpdate({
           name
         }
 
-        const typeUpdated = await api.put('/types', type );
+        const typeUpdated = await api.put(`/types/${id}`, type );
         
 
         const typesUpdated = types.map(type =>

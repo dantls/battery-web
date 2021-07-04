@@ -17,7 +17,7 @@ export default function StatusUpdate({
           name
         }
 
-        const itemUpdated = await api.put('/status', itemStatus );
+        const itemUpdated = await api.put(`/status/${id}`, itemStatus );
         
 
         const itemsUpdated = status.map(item =>

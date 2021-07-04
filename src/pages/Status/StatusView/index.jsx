@@ -9,7 +9,7 @@ import { BsPlusCircle} from "react-icons/bs";
 import StatusCreate from '../StatusCreate';
 import StatusUpdate from '../StatusUpdate';
 
-export default function Status(){
+export default function StatusView(){
 
   const [status, setStatus] = useState([]);
   const [selectedStatus, setSelectedStatus] = useState(null);

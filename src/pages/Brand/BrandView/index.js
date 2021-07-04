@@ -9,7 +9,7 @@ import { BsPlusCircle} from "react-icons/bs";
 import BrandCreate from '../BrandCreate';
 import BrandUpdate from '../BrandUpdate';
 
-export default function Brand(){
+export default function BrandView(){
 
   const [brands, setBrands] = useState([]);
   const [selectedBrand, setSelectedBrand] = useState(null);
