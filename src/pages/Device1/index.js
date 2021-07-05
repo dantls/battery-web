@@ -4,7 +4,7 @@ import {api} from '../../services/api';
 import {Form,Container} from './styles';
 
 
- export function Battery(){
+ export function Device(){
 
     const history = useHistory();
     
@@ -13,6 +13,7 @@ import {Form,Container} from './styles';
     const [type ,setType] = useState([]);
     const [status ,setStatus] = useState([]);
     const [code ,setCode] = useState('');
+    const [serie ,setSerie] = useState('');
     const [purchase ,setPurchase] = useState('');
     const [choiseType ,setChoiseType] = useState('');
     const [choiseStatus ,setChoiseStatus] = useState('');
@@ -46,7 +47,7 @@ import {Form,Container} from './styles';
     if(!brand){
       return;
     }
-    // const response = await api.get(`/${brand}/models`);
+
     const response = await api.get(`brands/${brand}/models`);
 
     setModelo(response.data)
@@ -54,13 +55,14 @@ import {Form,Container} from './styles';
 
    async function handleSubmit(event){
        event.preventDefault();
-       await api.post('/batteries',{
+       await api.post('/devices',{
          code,
          purchase,
          "type_id":choiseType,
          "status_id":choiseStatus,
          "modelo_id":choiseModel,
          "brand_id":choiseBrand,
+         serie
        });
   
        history.push('/home');
@@ -68,16 +70,17 @@ import {Form,Container} from './styles';
     return ( 
         <Container>
           <Form onSubmit = {handleSubmit}>
-          <label htmlFor="code">Código do Bateria* </label>
+          <label htmlFor="code">Código do Equipamento* </label>
           <input 
             type="text" 
             id="code" 
-            placeholder="Código da bateria"
+            placeholder="Código do equipamento"
             value={code}
             onChange={event =>setCode(event.target.value)}
           />
 
             <label htmlFor="name">Marca* </label>
+           
             <select 
               value={choiseBrand}
               onChange={event => {
@@ -106,7 +109,7 @@ import {Form,Container} from './styles';
             <label htmlFor="modelo">Modelo* </label>
             <select 
               value={choiseModel}
-              disabled={!modelo.length} 
+              disabled={!modelo.length }
               onChange={event =>setChoiseModel(event.target.value)}
             >
               <option
@@ -169,7 +172,15 @@ import {Form,Container} from './styles';
               </option>)})}
             </select>  
            
-            <label htmlFor="purchase">Data da compra* </label>
+            <label htmlFor="serie">Serie* </label>
+            <input 
+              type="text" 
+              id="serie" 
+              placeholder="Serie do equipamento"
+              value={serie}
+              onChange={event =>setSerie(event.target.value)}
+            />
+             <label htmlFor="purchase">Data da compra* </label>
             <input 
               type="date" 
               id="purchase" 

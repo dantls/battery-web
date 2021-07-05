@@ -1,13 +1,10 @@
 import { useState,useEffect} from 'react';
-import { useHistory } from 'react-router';
-import {api} from '../../services/api';
-import {Form,Container} from './styles';
+import { useHistory } from 'react-router-dom';
+import {api} from '../../../services/api';
+import { Container, Form } from "./styles";
 
-
- export function Device(){
-
+export default function DeviceCreate(){
     const history = useHistory();
-    
     const [brand ,setBrand] = useState([]);
     const [modelo ,setModelo] = useState([]);
     const [type ,setType] = useState([]);
@@ -19,6 +16,7 @@ import {Form,Container} from './styles';
     const [choiseStatus ,setChoiseStatus] = useState('');
     const [choiseBrand ,setChoiseBrand] = useState('');
     const [choiseModel ,setChoiseModel] = useState('');
+
     useEffect(()=>{
       async function loadTypes(){
         const response = await api.get('/types');
@@ -41,33 +39,36 @@ import {Form,Container} from './styles';
 
   },[]);
 
-
   async function models(brand){
 
     if(!brand){
       return;
     }
-    const response = await api.get(`/${brand}/models`);
+
+    const response = await api.get(`brands/${brand}/models`);
 
     setModelo(response.data)
   }
 
-   async function handleSubmit(event){
-       event.preventDefault();
-       await api.post('/devices',{
-         code,
-         purchase,
-         "type_id":choiseType,
-         "status_id":choiseStatus,
-         "modelo_id":choiseModel,
-         "brand_id":choiseBrand,
-         serie
-       });
-  
-       history.push('/home');
-    }
+    async function handleSubmit(event){
+      event.preventDefault();
+      await api.post('/devices',{
+        code,
+        purchase,
+        "type_id":choiseType,
+        "status_id":choiseStatus,
+        "modelo_id":choiseModel,
+        "brand_id":choiseBrand,
+        serie
+      });
+ 
+      history.push('/home');
+   }
+
+
     return ( 
-        <Container>
+       
+         <Container>
           <Form onSubmit = {handleSubmit}>
           <label htmlFor="code">Código do Equipamento* </label>
           <input 
@@ -190,7 +191,6 @@ import {Form,Container} from './styles';
     
           </Form>
         </Container>
-        
-        )
+    )
 
 }
