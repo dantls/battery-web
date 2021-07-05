@@ -1,27 +1,13 @@
 import styled from 'styled-components';
 
 export const Container = styled.main`
-  display: flex;
-  flex-direction: row;
   max-width: 1120px;
   margin: 0 auto;
-  padding: 2.5rem 2rem;
-  justify-content: space-around;
-
-  button{
-    border: 0;
-   
-    height:3rem;
-    background-color: transparent;
-
-    &:hover{
-      filter: brightness(0.9);
-    }
-  }
+  padding: 2.5rem 1rem;
 `;
 
 export const Form = styled.form`
-  max-width: 100%;
+  max-width: 20rem;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
@@ -32,6 +18,22 @@ export const Form = styled.form`
     font-size: 1.5rem;
     margin-bottom: 2rem;
   }
+  select{
+    width: 100%;
+    padding: 0 1.5rem;
+    height: 4rem;
+    border-radius: 0.25rem;
+
+    border: 1px solid var(--input-border);
+    background-color: var(--input-color);
+
+    font-weight: 400;
+    font-size: 1rem;
+
+    margin-bottom: 1rem;
+   
+  }
+
   input{
     width: 100%;
     padding: 0 1.5rem;

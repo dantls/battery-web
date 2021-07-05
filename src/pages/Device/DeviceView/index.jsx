@@ -7,7 +7,7 @@ import Swal from 'sweetalert2';
 import { BsPlusCircle} from "react-icons/bs";
 
 import DeviceCreate from '../DeviceCreate';
-// import DeviceUpdate from '../DeviceUpdate';
+import DeviceUpdate from '../DeviceUpdate';
 
 export default function DeviceView(){
 
@@ -113,7 +113,7 @@ export default function DeviceView(){
             />
           )
         }
-        {/* {isEditing && (
+        {isEditing && (
             <DeviceUpdate
               devices={devices}
               selectedDevice={selectedDevice}
@@ -121,7 +121,7 @@ export default function DeviceView(){
               setIsEditing={setIsEditing}
             />
           )
-        } */}
+        }
       </Container>
     )
 

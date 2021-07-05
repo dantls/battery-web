@@ -1,128 +1,170 @@
-import { Container} from "./styles";
-import {TableDevice} from '../../../components/TableDevice';
-import { useEffect, useState } from "react";
-import { api } from '../../../services/api';
-import Swal from 'sweetalert2';
+import { useState,useEffect} from 'react';
+import {api} from '../../../services/api';
+import { Container, Form } from "./styles";
 
-import { BsPlusCircle} from "react-icons/bs";
+export default function DeviceUpdate({
+  devices, selectedDevice, setDevices, setIsEditing
+}){
 
-// import DeviceCreate from '../DeviceCreate';
-// import DeviceUpdate from '../DeviceUpdate';
+    const id = selectedDevice.id;
 
-export default function DeviceView(){
+    const [modelos ,setModelos] = useState([]);
+    const [types ,setTypes] = useState([]);
+    const [status ,setStatus] = useState([]);
+    const [code ,setCode] = useState(selectedDevice.code);
+    const [serie ,setSerie] = useState(selectedDevice.serie);
+    const [purchase ,setPurchase] = useState(selectedDevice.purchase);
+    const [choiseType ,setChoiseType] = useState(selectedDevice.types.name);
+    const [choiseStatus ,setChoiseStatus] = useState(selectedDevice.status.name);
+    const [choiseModel ,setChoiseModel] = useState(selectedDevice.modelos.name);
 
-  const [devices, setDevices] = useState([]);
-  // const [modelos, setModelos] = useState([]);
-  // const [brands ,setBrands] = useState([]);
-  // const [types ,setTypes] = useState([]);
-  // const [status ,setStatus] = useState([]);
-
-  const [selectedDevice, setSelectedDevice] = useState(null);
-  // const [selectedModelo, setSelectedModelo] = useState(null);
-  // const [selectedType, setSelectedType] = useState(null);
-  // const [selectedBrand, setSelectedBrand] = useState(null);
-  // const [selectedStatus, setSelectedStatus] = useState(null);
-
-  const [isAdding, setIsAdding] = useState(false);
-  const [isEditing, setIsEditing] = useState(false);
-
-  useEffect(()=>{
-    async function loadDevices(){
-      const response = await api.get(`/devices`);
-      setDevices(response.data)
-    }
-    // async function loadModelos(){
-    //   const response = await api.get(`/models`);
-    //   setModelos(response.data)
-    // }
-    // async function loadTypes(){
-    //   const response = await api.get('/types');
-    //   setType(response.data);
-    // }
-    // async function loadBrands(){
-    //   const response = await api.get('/brands');
-    //   setBrand(response.data);
-    // }
-    // async function loadStatus(){
-    //   const response = await api.get('/status');
-    //   setStatus(response.data);
-    // }
-
-    // loadBrands();
-    // loadTypes();
-    // loadStatus();
-    // loadModelos();
-    loadDevices();
-  },[])
-
-  const handleEdit = id => {
-    const [device] = devices.filter(device => device.id === id);
-    setSelectedDevice(device);
-    setIsEditing(true);
-  };
-  const handleDelete = (id) => {
-    Swal.fire({
-      icon: 'warning',
-      title: 'Você tem certeza?',
-      text: "Você não poderá reverter essa ação!",
-      showCancelButton: true,
-      confirmButtonText: 'Sim, delete!',
-      cancelButtonText: 'Não, não delete!'
-    }).then(result => {
-      if (result.value) {
-        Swal.fire({
-          icon: 'success',
-          title: 'Deletado!',
-          text: `Deletado com sucesso.`,
-          showConfirmButton: false,
-          timer: 1500
-        });
-
-        api.delete(`/devices/${id}`);
-        
-        setDevices(devices.filter(device => device.id !== id));
+    useEffect(()=>{
+      async function loadTypes(){
+        const response = await api.get('/types');
+         setTypes(response.data);
       }
-    });
-  };
-  
-  
+      async function loadModels(){
+        const response = await api.get('/models');
+        setModelos(response.data);
+       
+      }
+      async function loadStatus(){
+        const response = await api.get('/status');
+        setStatus(response.data);
+       
+      }
+      loadTypes();
+      loadStatus();
+      loadModels();
+
+  },[]);
+
+   async function handleUpdate(event){
+    event.preventDefault();
+      
+    const device = {
+      code,
+      purchase,
+      "type_id":choiseType,
+      "status_id":choiseStatus,
+      "modelo_id":choiseModel,
+      serie
+    }
+
+    const deviceUpdated = await api.put(`/devices/${id}`, device );
+    
+
+    const devicesUpdated = devices.map(device =>
+      device.id !== deviceUpdated.data.id ? device : deviceUpdated.data,
+    );
+
+
+    setDevices([...devicesUpdated]);
+
+
+    setIsEditing(false);
+
+
+}
+
     return ( 
-      <Container>
-        {!isAdding && !isEditing && (
-          <>
-            <TableDevice
-              devices={devices}
-              handleEdit={handleEdit}
-              handleDelete={handleDelete}
-              setSelectedDevice={setSelectedDevice}
+       
+         <Container>
+          <Form onSubmit = {handleUpdate}>
+          <label htmlFor="code">Código do Equipamento* </label>
+          <input 
+            type="text" 
+            id="code" 
+            placeholder="Código do equipamento"
+            value={code}
+            onChange={event =>setCode(event.target.value)}
+          />
+
+            <label htmlFor="modelo">Modelo* </label>
+            <select 
+              value={choiseModel}
+              disabled={!modelos.length }
+              onChange={event =>setChoiseModel(event.target.value)}
+            >
+              <option
+                value=''
+                disabled
+                hidden
+              >
+                Selecione o modelo:
+              </option>
+              {modelos.map((item)=>{return (
+                  <option 
+                    key={item.id}
+                    value={item.id}
+                  >
+                    {item.name}
+                  </option>
+                )})
+              }  
+            </select>   
+
+            <label htmlFor="type">Tipo do Equipamento* </label>
+            <select 
+              value={choiseType}
+              onChange={event =>setChoiseType(event.target.value)}
+            >
+              <option
+                  value=''
+                  disabled
+                  hidden
+              >
+                  Selecione o tipo:
+              </option>
+             {types.map((item)=>{return (
+              <option
+                key={item.id}
+                value={item.id}
+              >
+                {item.name}
+              </option>)})}
+            </select>  
+
+            <label htmlFor="type">Status do Equipamento* </label>
+            <select 
+              value={choiseStatus}
+              onChange={event =>setChoiseStatus(event.target.value)}
+            >
+              <option
+                  value=''
+                  disabled
+                  hidden
+              >
+                  Selecione o status:
+              </option>
+             {status.map((item)=>{return (
+              <option
+                key={item.id}
+                value={item.id}
+              >
+                {item.name}
+              </option>)})}
+            </select>  
+           
+            <label htmlFor="serie">Serie* </label>
+            <input 
+              type="text" 
+              id="serie" 
+              placeholder="Serie do equipamento"
+              value={serie}
+              onChange={event =>setSerie(event.target.value)}
             />
-            <button onClick={() => setIsAdding(true)}>
-              <BsPlusCircle
-                size="25"
-                color="black"
-              />
-            </button> 
-          </> 
-          )
-        }
-        {isAdding && (
-            <DeviceCreate
-              devices={devices}
-              setDevices={setDevices}
-              setIsAdding={setIsAdding}
+             <label htmlFor="purchase">Data da compra* </label>
+            <input 
+              type="date" 
+              id="purchase" 
+              value={purchase}
+              onChange={event =>setPurchase(event.target.value)}
             />
-          )
-        }
-        {isEditing && (
-            <DeviceUpdate
-              devices={devices}
-              selectedDevice={selectedDevice}
-              setDevices={setDevices}
-              setIsEditing={setIsEditing}
-            />
-          )
-        }
-      </Container>
+            <button className= "btn"type="submit">Salvar</button>
+    
+          </Form>
+        </Container>
     )
 
 }
