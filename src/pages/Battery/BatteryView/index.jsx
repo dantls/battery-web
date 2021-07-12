@@ -1,32 +1,32 @@
 import { Container} from "./styles";
-import {TableDevice} from '../../../components/TableDevice';
+import {TableBattery} from '../../../components/TableBattery';
 import { useEffect, useState } from "react";
 import { api } from '../../../services/api';
 import Swal from 'sweetalert2';
 
 import { BsPlusCircle} from "react-icons/bs";
 
-import DeviceCreate from '../DeviceCreate';
-import DeviceUpdate from '../DeviceUpdate';
+import BatteryCreate from '../BatteryCreate';
+import BatteryUpdate from '../BatteryUpdate';
 
-export default function DeviceView(){
+export default function BatteryView(){
 
-  const [devices, setDevices] = useState([]);
-  const [selectedDevice, setSelectedDevice] = useState(null);
+  const [batteries, setBatteries] = useState([]);
+  const [selectedBattery, setSelectedBattery] = useState(null);
   const [isAdding, setIsAdding] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
 
   useEffect(()=>{
-    async function loadDevices(){
-      const response = await api.get(`/devices`);
-      setDevices(response.data)
+    async function loadBatteries(){
+      const response = await api.get(`/batteries`);
+      setBatteries(response.data)
     }
-    loadDevices();
+    loadBatteries();
   },[])
 
   const handleEdit = id => {
-    const [device] = devices.filter(device => device.id === id);
-    setSelectedDevice(device);
+    const [battery] = batteries.filter(battery => battery.id === id);
+    setSelectedBattery(battery);
     setIsEditing(true);
   };
   const handleDelete = (id) => {
@@ -47,9 +47,9 @@ export default function DeviceView(){
           timer: 1500
         });
 
-        api.delete(`/devices/${id}`);
+        api.delete(`/batteries/${id}`);
         
-        setDevices(devices.filter(device => device.id !== id));
+        setBatteries(batteries.filter(battery => battery.id !== id));
       }
     });
   };
@@ -59,11 +59,11 @@ export default function DeviceView(){
       <Container>
         {!isAdding && !isEditing && (
           <>
-            <TableDevice
-              devices={devices}
+            <TableBattery
+              batteries={batteries}
               handleEdit={handleEdit}
               handleDelete={handleDelete}
-              setSelectedDevice={setSelectedDevice}
+              setSelectedBattery={setSelectedBattery}
             />
             <button onClick={() => setIsAdding(true)}>
               <BsPlusCircle
@@ -75,18 +75,18 @@ export default function DeviceView(){
           )
         }
         {isAdding && (
-            <DeviceCreate
-              devices={devices}
-              setDevices={setDevices}
+            <BatteryCreate
+              batteries={batteries}
+              setBatteries={setBatteries}
               setIsAdding={setIsAdding}
             />
           )
         }
         {isEditing && (
-            <DeviceUpdate
-              devices={devices}
-              selectedDevice={selectedDevice}
-              setDevices={setDevices}
+            <BatteryUpdate
+              batteries={batteries}
+              selectedBattery={selectedBattery}
+              setBatteries={setBatteries}
               setIsEditing={setIsEditing}
             />
           )

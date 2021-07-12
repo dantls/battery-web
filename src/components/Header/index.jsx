@@ -12,7 +12,7 @@ export function Header({onPropsNewServiceModal,setIsAdding }){
         <div id="links">
           <nav>
             <li><Link to="/devices/view">Dispositivo</Link></li>
-            <li><Link to="/batteries">Bateria</Link></li>
+            <li><Link to="/batteries/view">Bateria</Link></li>
             <li><Link to="/models/view">Modelo</Link></li>
             <li><Link to="/types/view">Tipo</Link></li>
             <li><Link to="/brands/view">Marca</Link>

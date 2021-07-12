@@ -2,22 +2,19 @@ import { useState,useEffect} from 'react';
 import {api} from '../../../services/api';
 import { Container, Form } from "./styles";
 
-export default function DeviceUpdate({
-  devices, selectedDevice, setDevices, setIsEditing
+export default function BatteryUpdate({
+  batteries, selectedBattery, setBatteries, setIsEditing
 }){
-    const id = selectedDevice.id;
-
-    console.log(String(selectedDevice.purchase).substring(0,10));
+    const id = selectedBattery.id;
 
     const [modelos ,setModelos] = useState([]);
     const [types ,setTypes] = useState([]);
     const [status ,setStatus] = useState([]);
-    const [code ,setCode] = useState(selectedDevice.code);
-    const [serie ,setSerie] = useState(selectedDevice.serie);
-    const [purchase ,setPurchase] = useState(String(selectedDevice.purchase).substring(0,10));
-    const [choiseType ,setChoiseType] = useState(selectedDevice.types.id);
-    const [choiseStatus ,setChoiseStatus] = useState(selectedDevice.status.id);
-    const [choiseModel ,setChoiseModel] = useState(selectedDevice.modelos.id);
+    const [code ,setCode] = useState(selectedBattery.code);
+    const [purchase ,setPurchase] = useState(String(selectedBattery.purchase).substring(0,10));
+    const [choiseType ,setChoiseType] = useState(selectedBattery.types.id);
+    const [choiseStatus ,setChoiseStatus] = useState(selectedBattery.status.id);
+    const [choiseModel ,setChoiseModel] = useState(selectedBattery.modelos.id);
 
     useEffect(()=>{
       async function loadTypes(){
@@ -44,40 +41,34 @@ export default function DeviceUpdate({
     event.preventDefault();
 
       
-    const device = {
+    const battery = {
       code,
       purchase,
       "type_id":choiseType,
       "status_id":choiseStatus,
       "modelo_id":choiseModel,
-      serie
     }
 
-    const deviceUpdated = await api.put(`/devices/${id}`, device );
+    const batteryUpdated = await api.put(`/battery/${id}`, battery );
     
 
-    const devicesUpdated = devices.map(device =>
-      device.id !== deviceUpdated.data.id ? device : deviceUpdated.data,
+    const batteriesUpdated = batteries.map(battery =>
+      battery.id !== batteryUpdated.data.id ? battery : batteryUpdated.data,
     );
 
-
-    setDevices([...devicesUpdated]);
-
-
+    setBatteries([...batteriesUpdated]);
     setIsEditing(false);
-
-
 }
 
     return ( 
        
          <Container>
           <Form onSubmit = {handleUpdate}>
-          <label htmlFor="code">Código do Equipamento* </label>
+          <label htmlFor="code">Código da Bateria* </label>
           <input 
             type="text" 
             id="code" 
-            placeholder="Código do equipamento"
+            placeholder="Código da Bateria"
             value={code}
             onChange={event =>setCode(event.target.value)}
           />
@@ -148,15 +139,8 @@ export default function DeviceUpdate({
               </option>)})}
             </select>  
            
-            <label htmlFor="serie">Serie* </label>
-            <input 
-              type="text" 
-              id="serie" 
-              placeholder="Serie do equipamento"
-              value={serie}
-              onChange={event =>setSerie(event.target.value)}
-            />
-             <label htmlFor="purchase">Data da compra* </label>
+            
+            <label htmlFor="purchase">Data da compra* </label>
             <input 
               type="date" 
               id="purchase" 

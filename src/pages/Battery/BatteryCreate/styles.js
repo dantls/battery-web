@@ -53,7 +53,6 @@ export const Form = styled.form`
     & + input {
       margin-top: 1rem;
     }
-    margin-bottom: 1rem;
   }
   button[type="submit"]{
       width: 100%;
@@ -64,7 +63,7 @@ export const Form = styled.form`
       border-radius: 0.25rem;
       border: 0;
       font-size: 1rem;
-      margin-bottom: 2rem;
+      margin-top: 1.5rem;
   }
 
 `;

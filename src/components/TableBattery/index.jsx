@@ -1,9 +1,9 @@
 import { Container } from './styles';
 
-export function TableDevice({handleEdit, handleDelete,devices,setSelectedDevice}){
+export function TableBattery({handleEdit, handleDelete,batteries,setSelectedBattery}){
 
-  const formattedDevices = devices.map(item => {
-    const service = {
+  const formattedBatteries = batteries.map(item => {
+    const battery = {
       ...item,
     
       "formattedPurchase": new Date(item.purchase)
@@ -15,10 +15,9 @@ export function TableDevice({handleEdit, handleDelete,devices,setSelectedDevice}
     }
     
     return(
-      service
+      battery
     )
   })
-  console.log(formattedDevices)
   return(
     <Container>
       <table>
@@ -36,7 +35,7 @@ export function TableDevice({handleEdit, handleDelete,devices,setSelectedDevice}
 
         <tbody>
 
-          {formattedDevices.map( item => (
+          {formattedBatteries.map( item => (
             <tr key={item.id}>
             <td>{item.id}</td>
             <td>{item.code}</td>
@@ -49,7 +48,7 @@ export function TableDevice({handleEdit, handleDelete,devices,setSelectedDevice}
                   className="edit"
                   onClick={() => {
                     handleEdit(item.id)
-                    setSelectedDevice(item)
+                    setSelectedBattery(item)
                     }
                   }      
               >
@@ -59,7 +58,7 @@ export function TableDevice({handleEdit, handleDelete,devices,setSelectedDevice}
                   className="delete"
                   onClick={() => {
                     handleDelete(item.id)
-                    setSelectedDevice(item)
+                    setSelectedBattery(item)
                     }
                   }      
               >

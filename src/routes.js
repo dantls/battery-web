@@ -22,6 +22,12 @@ import ModeloView from './pages/Modelo/ModeloView';
 import ModeloUpdate from './pages/Modelo/ModeloUpdate';
 
 import DeviceView from './pages/Device/DeviceView';
+import DeviceCreate from './pages/Device/DeviceCreate';
+import DeviceUpdate from './pages/Device/DeviceUpdate';
+
+import BatteryView from './pages/Battery/BatteryView';
+import BatteryCreate from './pages/Battery/BatteryCreate';
+import BatteryUpdate from './pages/Battery/BatteryUpdate';
 
 import {Home} from './pages/Home';
 
@@ -82,6 +88,22 @@ export default function Routes(){
 
                 <Route path="/devices/view">
                     <DeviceView />
+                </Route>
+                <Route path="/devices/create">
+                    <DeviceCreate />
+                </Route>
+                <Route path="/devices//update/:id">
+                    <DeviceUpdate />
+                </Route>
+
+                <Route path="/batteries/view">
+                    <BatteryView />
+                </Route>
+                <Route path="/batteries/create">
+                    <BatteryCreate />
+                </Route>
+                <Route path="/batteries/update/:id">
+                    <BatteryUpdate />
                 </Route>
 
                

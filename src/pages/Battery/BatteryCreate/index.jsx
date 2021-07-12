@@ -1,13 +1,10 @@
 import { useState,useEffect} from 'react';
-import { useHistory } from 'react-router';
-import {api} from '../../services/api';
-import {Form,Container} from './styles';
+import { useHistory } from 'react-router-dom';
+import {api} from '../../../services/api';
+import { Container, Form } from "./styles";
 
-
- export function Battery(){
-
+export default function BatteryCreate(){
     const history = useHistory();
-    
     const [brand ,setBrand] = useState([]);
     const [modelo ,setModelo] = useState([]);
     const [type ,setType] = useState([]);
@@ -18,6 +15,8 @@ import {Form,Container} from './styles';
     const [choiseStatus ,setChoiseStatus] = useState('');
     const [choiseBrand ,setChoiseBrand] = useState('');
     const [choiseModel ,setChoiseModel] = useState('');
+
+
     useEffect(()=>{
       async function loadTypes(){
         const response = await api.get('/types');
@@ -40,35 +39,37 @@ import {Form,Container} from './styles';
 
   },[]);
 
-
   async function models(brand){
 
     if(!brand){
       return;
     }
-    // const response = await api.get(`/${brand}/models`);
+
     const response = await api.get(`brands/${brand}/models`);
 
     setModelo(response.data)
   }
 
-   async function handleSubmit(event){
-       event.preventDefault();
-       await api.post('/batteries',{
-         code,
-         purchase,
-         "type_id":choiseType,
-         "status_id":choiseStatus,
-         "modelo_id":choiseModel,
-         "brand_id":choiseBrand,
-       });
-  
-       history.push('/home');
-    }
+    async function handleSubmit(event){
+      event.preventDefault();
+      await api.post('/batteries',{
+        code,
+        purchase,
+        "type_id":choiseType,
+        "status_id":choiseStatus,
+        "modelo_id":choiseModel,
+        "brand_id":choiseBrand,
+      });
+ 
+      history.push('/home');
+   }
+
+
     return ( 
-        <Container>
+       
+         <Container>
           <Form onSubmit = {handleSubmit}>
-          <label htmlFor="code">Código do Bateria* </label>
+          <label htmlFor="code">Código da Bateria* </label>
           <input 
             type="text" 
             id="code" 
@@ -78,6 +79,7 @@ import {Form,Container} from './styles';
           />
 
             <label htmlFor="name">Marca* </label>
+           
             <select 
               value={choiseBrand}
               onChange={event => {
@@ -106,7 +108,7 @@ import {Form,Container} from './styles';
             <label htmlFor="modelo">Modelo* </label>
             <select 
               value={choiseModel}
-              disabled={!modelo.length} 
+              disabled={!modelo.length }
               onChange={event =>setChoiseModel(event.target.value)}
             >
               <option
@@ -127,7 +129,7 @@ import {Form,Container} from './styles';
               }  
             </select>   
 
-            <label htmlFor="type">Tipo do Equipamento* </label>
+            <label htmlFor="type">Tipo da Bateria* </label>
             <select 
               value={choiseType}
               onChange={event =>setChoiseType(event.target.value)}
@@ -148,7 +150,7 @@ import {Form,Container} from './styles';
               </option>)})}
             </select>  
 
-            <label htmlFor="type">Status do Equipamento* </label>
+            <label htmlFor="type">Status da Bateria* </label>
             <select 
               value={choiseStatus}
               onChange={event =>setChoiseStatus(event.target.value)}
@@ -180,7 +182,6 @@ import {Form,Container} from './styles';
     
           </Form>
         </Container>
-        
-        )
+    )
 
 }
