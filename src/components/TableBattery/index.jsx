@@ -64,6 +64,12 @@ export function TableBattery({handleEdit, handleDelete,batteries,setSelectedBatt
               >
                 Delete
               </button>  
+              <button
+                  className="charge"
+                  onClick={() => console.log(item) }      
+              >
+                Carregar
+              </button>  
               </td>        
             </tr>
           ))}

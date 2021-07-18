@@ -14,7 +14,6 @@ export const Container = styled.div`
       line-height: 1.5rem;
     }
     td{
-      height: 7rem;
       padding: 1rem 2rem;
       border:0;
       background-color: var(--shape);
@@ -27,8 +26,11 @@ export const Container = styled.div`
         width: 4rem;
       }
       &:last-child{
+        height: 10rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
         width: 12rem;
-        height: 100%;
         border-radius: 0 0.25rem 0.25rem 0 ;
         color: var(--text-title);
       }
@@ -53,6 +55,21 @@ export const Container = styled.div`
     font-size: 0.8rem;
     color: #FFFFFF;
     background-color: var(--green);
+    border: 0;
+    padding: 0.6rem;
+    border-radius: 0.25rem;
+    height:2.5rem;
+    margin-right: 0.2rem;
+    transition: filter 0.2s;
+
+    &:hover{
+      filter: brightness(0.9);
+    }
+  }
+  .charge{
+    font-size: 0.8rem;
+    color: #FFFFFF;
+    background-color: blue;
     border: 0;
     padding: 0.6rem;
     border-radius: 0.25rem;
