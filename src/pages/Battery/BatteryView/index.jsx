@@ -54,7 +54,7 @@ export default function BatteryView(){
       }
     });
   };
-  const handleChargeBattery = (id) => {
+   async function handleChargeBattery (id) {
     Swal.fire({
       icon: 'warning',
       title: 'Você tem certeza?',
@@ -72,9 +72,18 @@ export default function BatteryView(){
           timer: 1500
         });
 
-        api.post(`/batteries-services/${id}`);
-        const [battery] = batteries.filter(battery => battery.id === id);
-        setBatteries([...batteries, battery]);
+         api.post(`/batteries-services/${id}`).then(
+          batteryUpdated => {
+            const batteriesUpdated = batteries.map(battery =>
+              battery.id !== batteryUpdated.data.id ? battery : batteryUpdated.data,
+            );
+        
+            setBatteries([...batteriesUpdated]);
+    
+          }
+        );
+
+        
       }
     });
   };
