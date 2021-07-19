@@ -29,6 +29,7 @@ export default function BatteryView(){
     setSelectedBattery(battery);
     setIsEditing(true);
   };
+  
   const handleDelete = (id) => {
     Swal.fire({
       icon: 'warning',
@@ -53,6 +54,30 @@ export default function BatteryView(){
       }
     });
   };
+  const handleChargeBattery = (id) => {
+    Swal.fire({
+      icon: 'warning',
+      title: 'Você tem certeza?',
+      text: "Você não poderá reverter essa ação!",
+      showCancelButton: true,
+      confirmButtonText: 'Sim!',
+      cancelButtonText: 'Não, não!'
+    }).then(result => {
+      if (result.value) {
+        Swal.fire({
+          icon: 'success',
+          title: 'Carregando!',
+          text: `Ação realizada com sucesso.`,
+          showConfirmButton: false,
+          timer: 1500
+        });
+
+        api.post(`/batteries-services/${id}`);
+        const [battery] = batteries.filter(battery => battery.id === id);
+        setBatteries([...batteries, battery]);
+      }
+    });
+  };
   
   
     return ( 
@@ -64,6 +89,7 @@ export default function BatteryView(){
               handleEdit={handleEdit}
               handleDelete={handleDelete}
               setSelectedBattery={setSelectedBattery}
+              charge={handleChargeBattery}
             />
             <button onClick={() => setIsAdding(true)}>
               <BsPlusCircle

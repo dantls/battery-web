@@ -1,6 +1,12 @@
 import { Container } from './styles';
 
-export function TableBattery({handleEdit, handleDelete,batteries,setSelectedBattery}){
+export function TableBattery({
+  handleEdit, 
+  handleDelete,
+  batteries,
+  setSelectedBattery,
+  charge
+}){
 
   const formattedBatteries = batteries.map(item => {
     const battery = {
@@ -66,7 +72,7 @@ export function TableBattery({handleEdit, handleDelete,batteries,setSelectedBatt
               </button>  
               <button
                   className="charge"
-                  onClick={() => console.log(item) }      
+                  onClick={() => charge(item.id) }      
               >
                 Carregar
               </button>  
