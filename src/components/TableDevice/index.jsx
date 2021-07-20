@@ -6,7 +6,7 @@ export function TableDevice({handleEdit, handleDelete,devices,setSelectedDevice}
     const service = {
       ...item,
     
-      "formattedPurchase": new Date(item.purchase)
+      formattedPurchase: new Date(item.purchase)
       .toISOString('pt-BR')
       .substring(0,10)
       .split('-')
@@ -18,8 +18,10 @@ export function TableDevice({handleEdit, handleDelete,devices,setSelectedDevice}
       service
     )
   })
-  console.log(formattedDevices)
-  return(
+
+  
+
+    return(
     <Container>
       <table>
         <thead>

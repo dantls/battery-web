@@ -12,7 +12,7 @@ export function TableBattery({
     const battery = {
       ...item,
     
-      "formattedPurchase": new Date(item.purchase)
+      formattedPurchase: new Date(item.purchase)
       .toISOString('pt-BR')
       .substring(0,10)
       .split('-')
