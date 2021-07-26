@@ -31,9 +31,7 @@ import BatteryUpdate from './pages/Battery/BatteryUpdate';
 
 import {Home} from './pages/Home';
 
-// import {Device} from './pages/Device';
-
-// import {Battery} from './pages/Battery';
+import {Dashboard} from './pages/Dashboard';
 
 import {Service} from './pages/Service';
 
@@ -41,7 +39,7 @@ export default function Routes(){
     return(
             <Switch>
                 <Route path="/"exact>
-                    <Home />
+                    <Dashboard />
                 </Route>
             
 

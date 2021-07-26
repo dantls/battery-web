@@ -3,11 +3,13 @@ import { Container, Content } from './styles';
 import { Link } from 'react-router-dom';
 
 
-export function Header({onPropsNewServiceModal,setIsAdding }){
+export function Header({onPropsNewServiceModal }){
   return(
     <Container>
       <Content>
+      <Link to="/">
         <img src={logo} alt="bc" />
+      </Link>
        
         <div id="links">
           <nav>
@@ -15,13 +17,7 @@ export function Header({onPropsNewServiceModal,setIsAdding }){
             <li><Link to="/batteries/view">Bateria</Link></li>
             <li><Link to="/models/view">Modelo</Link></li>
             <li><Link to="/types/view">Tipo</Link></li>
-            <li><Link to="/brands/view">Marca</Link>
-              {/* <ul>
-                <li>
-                  <button onClick={() => setIsAdding(true)}>Novo</button>
-                </li>
-              </ul> */}
-            </li>
+            <li><Link to="/brands/view">Marca</Link></li>
             <li><Link to="/status/view">Status</Link></li>
             <li><Link to="/services">Serviços</Link></li>
           </nav>

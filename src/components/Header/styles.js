@@ -49,30 +49,13 @@ export const Content = styled.div`
         color: var(--shape);
 
       }
-      /* li{
-        position: relative;
-      }
-
-      li ul{
-        position:absolute;
-        top:30px;
-        left:0;
-        display:none;
-      }
-      li:hover ul, li.over ul{
-        display:block;
-      }
-
-      li ul li{
-        display:block;
-      } */
-
   }
 
-  @media(max-width:820px){
+  @media(max-width:875px){
+    width: 100%;
+    
     nav{
-      display: none;
-     
+      display: none;  
     }
   }
 `;
