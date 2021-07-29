@@ -32,6 +32,8 @@ import BatteryUpdate from './pages/Battery/BatteryUpdate';
 import {Home} from './pages/Home';
 
 import {Dashboard} from './pages/Dashboard';
+import {DashboardServices} from './pages/DashboardServices';
+import {DashboardBatteries} from './pages/DashboardBatteries';
 
 import {Service} from './pages/Service';
 
@@ -40,6 +42,13 @@ export default function Routes(){
             <Switch>
                 <Route path="/"exact>
                     <Dashboard />
+                </Route>
+            
+                <Route path="/batteries/dashboard"exact>
+                    <DashboardBatteries />
+                </Route>
+                <Route path="/services/dashboard"exact>
+                    <DashboardServices />
                 </Route>
             
 
@@ -90,7 +99,7 @@ export default function Routes(){
                 <Route path="/devices/create">
                     <DeviceCreate />
                 </Route>
-                <Route path="/devices//update/:id">
+                <Route path="/devices/update/:id">
                     <DeviceUpdate />
                 </Route>
 
