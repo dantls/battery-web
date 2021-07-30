@@ -18,71 +18,63 @@ export function DashboardBatteries() {
     .then(response => setServicesBattery(response.data))
   },[])
 
-  const formattedServicesBattery = servicesBattery.map(item => {
-    let passed = new Date(item.initial_date);
+  let elapsedDateBatteryService;
+  let elapsedDateService;
 
-    let elapsed = formatDistanceToNow(
-      passed,
-      {
-        locale: ptBR,
-      }
-    )
+  const formattedServicesBattery = servicesBattery.map(item => {
+
+    if(item.initial_date_battery_service){
+      let passedDateBatteryService = new Date(item.initial_date_battery_service);
+
+      elapsedDateBatteryService = formatDistanceToNow(
+        passedDateBatteryService,
+        {
+          locale: ptBR,
+        }
+      )
+    }
+    if(item.initial_date_service){
+      let passedDateService = new Date(item.initial_date_service);
+
+      elapsedDateService = formatDistanceToNow(
+        passedDateService,
+        {
+          locale: ptBR,
+        }
+      )
+    }
+
 
 
     const service = {
       ...item,
       
-      "initial_date": new Date(item.initial_date).toLocaleString('pt-BR',{ 
+      "initial_date_service": item.initial_date_service ? new Date(item.initial_date_service).toLocaleString('pt-BR',{ 
         day:"2-digit",
         month:"2-digit",
         year:"numeric",
         hour: 'numeric',
-        minute: '2-digit' }),
-      elapsed 
+        minute: '2-digit' }) : null,
+        
+        elapsedDateService ,
+
+      "initial_date_battery_service": item.initial_date_battery_service ? new Date(item.initial_date_battery_service).toLocaleString('pt-BR',{ 
+        day:"2-digit",
+        month:"2-digit",
+        year:"numeric",
+        hour: 'numeric',
+        minute: '2-digit' }) : null,
+
+      
+      elapsedDateBatteryService
+
     }
     
     return(
       service
     )
   })
-  
-  // const [incidents, setIncidents] = useState([]);
-  const history = useHistory();
 
-  // const ongName = localStorage.getItem('ongName');
-  // const ongId = localStorage.getItem('ongId');
-
-  // useEffect(() => {
-  //   api.get('profile', {
-  //     headers:{
-  //       Authorization:ongId,
-  //     }
-  //   }).then(response =>{
-  //     setIncidents(response.data);
-  //   })
-
-  // }, [ongId]);
-
-  // async function handleDeleteIncident(id)
-  // {
-  //   try {
-  //     await api.delete(`incidents/${id}`,{
-  //       headers:{
-  //         Authorization: ongId,
-  //       }
-  //     });
-
-  //     setIncidents(incidents.filter(incident => incident.id !== id));
-
-  //   } catch (error) {
-  //     alert('Erro ao deletar caso, tente novamente');
-  //   }
-  // }
-
-  // function handleLogout(){
-  //   localStorage.clear();
-  //   history.push('/');
-  // }
 
   return (
     <Container>
@@ -94,21 +86,25 @@ export function DashboardBatteries() {
               <div>
                 <div>
                   <strong>Bateria: </strong>
-                  <p>{service.batteries.code}</p>
+                  <p>{service.code}</p>
+                </div>
+                <div>
+                  <strong>Status: </strong>
+                  <p>{service.status}</p>
                 </div>
               </div>
               <div>
                 <strong>Data Inicial: </strong>
-                <p>{service.initial_date}</p>
+                <p>{service.initial_date_service || service.initial_date_battery_service }</p>
               </div>
             
               <div>
                 <strong>Tempo de uso: </strong>
-                <p>{service.elapsed}</p>
+                <p>{service.elapsedDateService || service.elapsedDateBatteryService}</p>
               </div>
               <div>
                 <strong>Status: </strong>
-                <p>{service.status.name}</p>
+                <p>{service.status }</p>
               </div>
               
 
