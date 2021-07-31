@@ -1,14 +1,12 @@
 import React, {useState,useEffect} from 'react';
-import { FiTrash2} from 'react-icons/fi';
-
-import formatDistanceToNow from 'date-fns/formatDistanceToNow';
-import { ptBR } from 'date-fns/locale';
-
-import {useHistory} from 'react-router-dom';
-
-import { Container } from './styles';
 
 import { api} from '../../services/api';
+
+import { formatDate } from '../../utils/formatDate';
+import { formatDateElapsed } from '../../utils/formatDateElapsed';
+
+import { FiTrash2} from 'react-icons/fi';
+import { Container } from './styles';
 
 export function DashboardServices() {
   const [services, setServices] = useState([]);
@@ -19,25 +17,13 @@ export function DashboardServices() {
   },[])
 
   const formattedServices = services.map(item => {
-    let passed = new Date(item.initial_date);
+    const passed = new Date(item.initial_date);
 
-    let elapsed = formatDistanceToNow(
-      passed,
-      {
-        locale: ptBR,
-      }
-    )
-
+    const elapsed = formatDateElapsed(passed)
 
     const service = {
       ...item,
-      
-      "initial_date": new Date(item.initial_date).toLocaleString('pt-BR',{ 
-        day:"2-digit",
-        month:"2-digit",
-        year:"numeric",
-        hour: 'numeric',
-        minute: '2-digit' }),
+      "initial_date": formatDate(item.initial_date),
       elapsed 
     }
     
@@ -47,7 +33,6 @@ export function DashboardServices() {
   })
   
   // const [incidents, setIncidents] = useState([]);
-  const history = useHistory();
 
   // const ongName = localStorage.getItem('ongName');
   // const ongId = localStorage.getItem('ongId');

@@ -1,14 +1,11 @@
 import React, {useState,useEffect} from 'react';
 import { FiTrash2} from 'react-icons/fi';
 
-import formatDistanceToNow from 'date-fns/formatDistanceToNow';
-import { ptBR } from 'date-fns/locale';
-
-import {useHistory} from 'react-router-dom';
-
 import { Container } from './styles';
 
 import { api} from '../../services/api';
+import { formatDateElapsed } from '../../utils/formatDateElapsed';
+import { formatDate } from '../../utils/formatDate';
 
 export function DashboardBatteries() {
   const [servicesBattery, setServicesBattery] = useState([]);
@@ -25,51 +22,28 @@ export function DashboardBatteries() {
 
     if(item.initial_date_battery_service){
       let passedDateBatteryService = new Date(item.initial_date_battery_service);
-
-      elapsedDateBatteryService = formatDistanceToNow(
-        passedDateBatteryService,
-        {
-          locale: ptBR,
-        }
-      )
+      elapsedDateBatteryService = formatDateElapsed(passedDateBatteryService)
     }
     if(item.initial_date_service){
       let passedDateService = new Date(item.initial_date_service);
-
-      elapsedDateService = formatDistanceToNow(
-        passedDateService,
-        {
-          locale: ptBR,
-        }
-      )
+      elapsedDateService = formatDateElapsed(passedDateService)
     }
-
-
 
     const service = {
       ...item,
-      
-      "initial_date_service": item.initial_date_service ? new Date(item.initial_date_service).toLocaleString('pt-BR',{ 
-        day:"2-digit",
-        month:"2-digit",
-        year:"numeric",
-        hour: 'numeric',
-        minute: '2-digit' }) : null,
-        
-        elapsedDateService ,
 
-      "initial_date_battery_service": item.initial_date_battery_service ? new Date(item.initial_date_battery_service).toLocaleString('pt-BR',{ 
-        day:"2-digit",
-        month:"2-digit",
-        year:"numeric",
-        hour: 'numeric',
-        minute: '2-digit' }) : null,
+      "initial_date_service": item.initial_date_service 
+        ? formatDate(item.initial_date_service)
+        : null,
 
-      
+      elapsedDateService ,
+
+      "initial_date_battery_service": item.initial_date_battery_service 
+        ? formatDate(item.initial_date_battery_service)
+        : null,
+
       elapsedDateBatteryService
-
     }
-    
     return(
       service
     )
@@ -78,7 +52,7 @@ export function DashboardBatteries() {
 
   return (
     <Container>
-       <h1>Baterias carregando</h1>
+       <h1>Baterias</h1>
 
        <ul>
         {formattedServicesBattery.map(service => (

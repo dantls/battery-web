@@ -29,11 +29,9 @@ import BatteryView from './pages/Battery/BatteryView';
 import BatteryCreate from './pages/Battery/BatteryCreate';
 import BatteryUpdate from './pages/Battery/BatteryUpdate';
 
-import {Home} from './pages/Home';
-
-import {Dashboard} from './pages/Dashboard';
 import {DashboardServices} from './pages/DashboardServices';
 import {DashboardBatteries} from './pages/DashboardBatteries';
+import {DashboardDevices} from './pages/DashboardDevices';
 
 import {Service} from './pages/Service';
 
@@ -41,11 +39,14 @@ export default function Routes(){
     return(
             <Switch>
                 <Route path="/"exact>
-                    <Dashboard />
+                    <DashboardServices/>
                 </Route>
             
                 <Route path="/batteries/dashboard"exact>
                     <DashboardBatteries />
+                </Route>
+                <Route path="/devices/dashboard"exact>
+                    <DashboardDevices />
                 </Route>
                 <Route path="/services/dashboard"exact>
                     <DashboardServices />
