@@ -5,7 +5,7 @@ import { api} from '../../services/api';
 import { formatDate } from '../../utils/formatDate';
 import { formatDateElapsed } from '../../utils/formatDateElapsed';
 
-import { FiTrash2} from 'react-icons/fi';
+import { RiCloseFill } from 'react-icons/ri';
 import { Container } from './styles';
 
 export function DashboardServices() {
@@ -103,7 +103,7 @@ export function DashboardServices() {
 
            
               <button  type="button">
-                <FiTrash2 size={20} color="#a8a8b3"/>
+                <RiCloseFill size={20} color="#a8a8b3"/>
               </button>
             </li>
           )

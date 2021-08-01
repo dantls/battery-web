@@ -1,5 +1,4 @@
 import React, {useState,useEffect} from 'react';
-import { FiTrash2} from 'react-icons/fi';
 
 import { Container } from './styles';
 
@@ -66,16 +65,7 @@ export function DashboardDevices() {
                 <strong>Data de compra: </strong>
                 <p>{device.formattedPurchase}</p>
               </div> 
-              {/* <div>
-                <strong>Status: </strong>
-                <p>{device.status }</p>
-              </div> */}
-              
-
-           
-              <button  type="button">
-                <FiTrash2 size={20} color="#a8a8b3"/>
-              </button>
+          
             </li>
           )
         )}         

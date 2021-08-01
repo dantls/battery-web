@@ -1,13 +1,18 @@
-import 'dotenv/config'
 import { useState } from 'react';
 
 import { GlobalStyle } from "./styles/global";
 import { Header } from "./components/Header";
 import Routes from './routes';
+import {SignIn} from './pages/SignIn'
 import { BrowserRouter } from 'react-router-dom';
 import { NewServiceModal } from "./components/NewServiceModal";
 
+import {AuthProvider} from './context/AuthContext';
+
+
 function App() {
+  
+
   const [isNewServiceModalOpen, setIsNewServiceModalOpen] = useState(false);
 
   function handleOpenNewServiceModal(){
@@ -18,15 +23,21 @@ function App() {
   }
 
   return (
-    <BrowserRouter >
-      <Header onPropsNewServiceModal={handleOpenNewServiceModal}/>
-      <Routes />
+    <>
+      <AuthProvider>
+        <BrowserRouter >
+          {/* <Header onPropsNewServiceModal={handleOpenNewServiceModal}/> */}
+          <SignIn />
+          {/* <Routes /> */}
+          
+          <NewServiceModal 
+            isOpen={isNewServiceModalOpen}
+            onRequestClose={handleCloseNewServiceModal}
+          />
+        </BrowserRouter>
+      </AuthProvider>
       <GlobalStyle />
-      <NewServiceModal 
-        isOpen={isNewServiceModalOpen}
-        onRequestClose={handleCloseNewServiceModal}
-      />
-    </BrowserRouter>
+    </>
   )
 }
 

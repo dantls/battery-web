@@ -1,5 +1,9 @@
 import React, {useState,useEffect} from 'react';
-import { FiTrash2} from 'react-icons/fi';
+import { 
+  RiBattery2ChargeLine ,
+  RiBattery2Fill,
+  RiBatteryShareFill,
+  RiBattery2Line} from 'react-icons/ri';
 
 import { Container } from './styles';
 
@@ -9,6 +13,40 @@ import { formatDate } from '../../utils/formatDate';
 
 export function DashboardBatteries() {
   const [servicesBattery, setServicesBattery] = useState([]);
+
+  // async function handleChargeBattery (id) {
+  //   Swal.fire({
+  //     icon: 'warning',
+  //     title: 'Você tem certeza?',
+  //     text: "Você não poderá reverter essa ação!",
+  //     showCancelButton: true,
+  //     confirmButtonText: 'Sim!',
+  //     cancelButtonText: 'Não, não!'
+  //   }).then(result => {
+  //     if (result.value) {
+  //       Swal.fire({
+  //         icon: 'success',
+  //         title: 'Carregando!',
+  //         text: `Ação realizada com sucesso.`,
+  //         showConfirmButton: false,
+  //         timer: 1500
+  //       });
+
+  //        api.post(`/batteries-services/${id}`).then(
+  //         batteryUpdated => {
+  //           const batteriesUpdated = batteries.map(battery =>
+  //             battery.id !== batteryUpdated.data.id ? battery : batteryUpdated.data,
+  //           );
+        
+  //           setBatteries([...batteriesUpdated]);
+    
+  //         }
+  //       );
+
+        
+  //     }
+  //   });
+  // };
 
   useEffect(()=>{
     api.get('batteries-services')
@@ -81,11 +119,47 @@ export function DashboardBatteries() {
                 <p>{service.status }</p>
               </div>
               
+              {
+                ( (service.status === 'Carregada') 
+                  ?
+                    <button  type="button">
+                    <RiBattery2Fill size={20} color="#a8a8b3"/>
+                    </button>
+                  : <></>
+                )
+              }
+              {
+                ( (service.status === 'Carregando') 
+                  ?
+                    <button  type="button">
+                    <RiBattery2ChargeLine size={20} color="#a8a8b3"/>
+                    </button>
+                  : <></>
+                )
+              }
+              {
+                ( (service.status === 'Em uso') 
+                  ?
+                    <button  type="button">
+                    <RiBatteryShareFill size={20} color="#a8a8b3"/>
+                    </button>
+                  : <></>
+                )
+              }
+              {
+                ( (service.status === 'Aguardando') 
+                  ?
+                    <button  type="button">
+                    <RiBattery2Line size={20} color="#a8a8b3"/>
+                    </button>
+                  : <></>
+                )
+              }
+          
+             
+
 
            
-              <button  type="button">
-                <FiTrash2 size={20} color="#a8a8b3"/>
-              </button>
             </li>
           )
         )}         

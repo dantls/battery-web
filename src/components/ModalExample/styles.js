@@ -32,7 +32,7 @@ export const Container = styled.form`
       margin-top: 1rem;
     }
   }
-  button[type="submit"]{
+  button{
       width: 100%;
       padding: 0 1.5rem;
       height: 4rem;

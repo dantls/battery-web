@@ -37,6 +37,7 @@ import {Service} from './pages/Service';
 
 export default function Routes(){
     return(
+            <>
             <Switch>
                 <Route path="/"exact>
                     <DashboardServices/>
@@ -122,6 +123,6 @@ export default function Routes(){
                     <Service />
                 </Route>
             </Switch>
-
+                </>
     );
 }
