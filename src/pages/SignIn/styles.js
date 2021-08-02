@@ -15,7 +15,7 @@ export const Content = styled.div`
   align-items: center;
   height: 100%;
   width: 100%;
-  max-width: 700px;
+  max-width: 650px;
 `;
 
 const apperFromLeft = keyframes`
@@ -107,7 +107,6 @@ export const AnimationContainer = styled.div`
 `;
 export const Background = styled.div`
   flex: 1;
-  margin-left: -100px;
   background: url(${signInBackground}) no-repeat center;
   background-size: cover;
 `;

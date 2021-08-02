@@ -6,8 +6,13 @@ import {Container} from './styles';
 import closeImg from '../../assets/close.svg'
 import { api } from '../../services/api';
 import { useHistory } from 'react-router';
+import { useModal } from '../../hooks/modal';
 Modal.setAppElement('#root');
-export function NewServiceModal({isOpen,onRequestClose }){
+
+
+
+export function NewServiceModal(){
+  const {isNewServiceModalOpen , handleCloseNewServiceModal} = useModal()
 
   const history = useHistory();
   
@@ -25,7 +30,7 @@ export function NewServiceModal({isOpen,onRequestClose }){
        });
 
     history.push('/');
-    onRequestClose()
+    handleCloseNewServiceModal()
   }
 
   useEffect(()=>{
@@ -44,19 +49,19 @@ export function NewServiceModal({isOpen,onRequestClose }){
     setChoiseDevice('');
     setChoiseBattery('');
     
-  },[isOpen]);
+  },[]);
 
   
   return(
     <Modal
-      isOpen={isOpen}
-      onRequestClose={onRequestClose}
+      isOpen={isNewServiceModalOpen}
+      onRequestClose={handleCloseNewServiceModal}
       overlayClassName="react-modal-overlay"
       className="react-modal-content"
     >
       <button 
         type="button"
-        onClick={onRequestClose}
+        onClick={handleCloseNewServiceModal}
         className="react-modal-close"
       >
         <img 

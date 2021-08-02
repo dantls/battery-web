@@ -2,7 +2,7 @@ import React, {  useCallback, useState } from 'react';
 import * as Yup from 'yup';
 
 import { Link
-  // , useHistory 
+  , useHistory 
 } from 'react-router-dom';
 
 
@@ -16,12 +16,10 @@ import logoImg from '../../assets/logo.jpg';
 // import getValidationErrors from '../../utils/getValidationErrors';
 
 import { Container, Content, Background, AnimationContainer } from './styles';
-import { useAuth } from '../../hooks/AuthContext';
-
-
+import { useAuth } from '../../hooks/auth';
 
 export const SignIn = () => {
-  // const history = useHistory();
+  const history = useHistory();
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
@@ -48,7 +46,7 @@ export const SignIn = () => {
           password
         });
 
-        // history.push('/dashboard');
+         history.push('/batteries/dashboard');
       } catch (error) {
         if (error instanceof Yup.ValidationError) {
           // const errors = getValidationErrors(error);
@@ -63,7 +61,7 @@ export const SignIn = () => {
         // });
       }
     },
-    [ email, password ],
+    [ email, password , history, signIn],
   );
   return (
     <Container>

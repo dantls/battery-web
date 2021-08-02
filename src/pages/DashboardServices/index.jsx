@@ -7,9 +7,13 @@ import { formatDateElapsed } from '../../utils/formatDateElapsed';
 
 import { RiCloseFill } from 'react-icons/ri';
 import { Container } from './styles';
+import { useBattery } from '../../hooks/battery';
+
 
 export function DashboardServices() {
   const [services, setServices] = useState([]);
+  const {handleChargeBattery} = useBattery()
+
 
   useEffect(()=>{
     api.get('services')
@@ -101,8 +105,10 @@ export function DashboardServices() {
               </div>
               
 
-           
-              <button  type="button">
+              
+              <button  type="button"
+              onClick={() => handleChargeBattery(service.battery_id)}>
+
                 <RiCloseFill size={20} color="#a8a8b3"/>
               </button>
             </li>

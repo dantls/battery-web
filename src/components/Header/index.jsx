@@ -1,11 +1,19 @@
 import logo from '../../assets/logo.jpg';
 import { Container, Content } from './styles';
 import { Link } from 'react-router-dom';
+import { useModal } from '../../hooks/modal';
+import { NewServiceModal } from "../../components/NewServiceModal";
+// /components/NewServiceModal
 
 
-export function Header({onPropsNewServiceModal }){
+export function Header(){
+  const {handleOpenNewServiceModal} = useModal();
+
+
   return(
+    <>
     <Container>
+      
       <Content>
       <Link to="/services/dashboard">
         <img src={logo} alt="bc" />
@@ -19,7 +27,7 @@ export function Header({onPropsNewServiceModal }){
           </nav>
           <button 
             type="button"
-            onClick={onPropsNewServiceModal}
+            onClick={handleOpenNewServiceModal}
           >
             Novo serviço
           </button> 
@@ -27,5 +35,7 @@ export function Header({onPropsNewServiceModal }){
        
       </Content>
     </Container>
+    <NewServiceModal/>
+    </>
   )
 }

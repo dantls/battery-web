@@ -15,8 +15,6 @@ export function DashboardDevices() {
     loadDevices();
   },[])
 
-  console.log(devices)
-
   const formattedDevices = devices.map(item => {
     
     const device = {
