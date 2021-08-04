@@ -13,7 +13,7 @@ import { formatDate } from '../../utils/formatDate';
 import { useBattery } from '../../hooks/battery';
 
 export function DashboardBatteries() {
-  const {handleFinishBatteryCharge} = useBattery()
+  const {handleFinishBatteryCharge , handleChargeBattery} = useBattery()
   const [servicesBattery, setServicesBattery] = useState([]);
 
   useEffect(()=>{
@@ -128,7 +128,7 @@ export function DashboardBatteries() {
                   ( (service.status === 'Aguardando') 
                     ?
                       <button  
-                        onClick={() => console.log(service)}
+                        onClick={() => handleChargeBattery(service.battery_id)}
                         type="button"
                       >
                         <RiBattery2Line size={20} color="#a8a8b3"/>
