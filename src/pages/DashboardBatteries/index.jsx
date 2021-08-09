@@ -13,7 +13,7 @@ import { formatDate } from '../../utils/formatDate';
 import { useBattery } from '../../hooks/battery';
 
 export function DashboardBatteries() {
-  const {handleFinishBatteryCharge} = useBattery()
+  const {handleFinishBatteryCharge, handleChargeBattery} = useBattery()
   const [servicesBattery, setServicesBattery] = useState([]);
 
   useEffect(()=>{
@@ -96,7 +96,7 @@ export function DashboardBatteries() {
                   ( (service.status === 'Carregada') 
                     ?
                       <button  type="button">
-                        <RiBattery2Fill size={20} color="#a8a8b3"/>
+                        <RiBattery2Fill size={20} color="green"/>
                       </button>
                     : <></>
                   )
@@ -110,7 +110,7 @@ export function DashboardBatteries() {
                           () => handleFinishBatteryCharge(service.battery_id)
                         }
                       >
-                        <RiBattery2ChargeLine size={20} color="#a8a8b3"/>
+                        <RiBattery2ChargeLine size={20} color="blue"/>
                       </button>
                     : <></>
                   )
@@ -119,7 +119,7 @@ export function DashboardBatteries() {
                   ( (service.status === 'Em uso') 
                     ?
                       <button  type="button">
-                      <RiBatteryShareFill size={20} color="#a8a8b3"/>
+                      <RiBatteryShareFill size={20} color="red"/>
                       </button>
                     : <></>
                   )
@@ -128,10 +128,10 @@ export function DashboardBatteries() {
                   ( (service.status === 'Aguardando') 
                     ?
                       <button  
-                        onClick={() => console.log(service)}
+                        onClick={() => handleChargeBattery(service.battery_id)}
                         type="button"
                       >
-                        <RiBattery2Line size={20} color="#a8a8b3"/>
+                        <RiBattery2Line size={20} color="orange"/>
                       </button>
                     : <></>
                   )
