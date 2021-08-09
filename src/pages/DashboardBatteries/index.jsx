@@ -13,7 +13,8 @@ import { formatDate } from '../../utils/formatDate';
 import { useBattery } from '../../hooks/battery';
 
 export function DashboardBatteries() {
-  const {handleFinishBatteryCharge, handleChargeBattery} = useBattery()
+  const {handleFinishBatteryCharge , handleChargeBattery} = useBattery()
+
   const [servicesBattery, setServicesBattery] = useState([]);
 
   useEffect(()=>{
