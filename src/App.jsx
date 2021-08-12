@@ -7,7 +7,7 @@ import { BrowserRouter } from 'react-router-dom';
 import AppProvider from './hooks';
 
 function App() {
-  
+
   return (
     <BrowserRouter >
       <GlobalStyle />

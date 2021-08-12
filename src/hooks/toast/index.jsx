@@ -1,15 +1,16 @@
 import React, { createContext, useCallback, useContext, useState } from 'react';
-import { uuid } from 'uuidv4';
+import { v4 as uuidv4 } from 'uuid';
 
-import ToastContainer from '../components/ToastContainer';
+import ToastContainer from '../../components/ToastContainer';
 
-const ToastContext = createContext<ToastContextData>({});
+const ToastContext = createContext({});
 
 const ToastProvider = ({ children }) => {
-  const [messages, setMessages] = useState<ToastMessage[]>([]);
+  const [messages, setMessages] = useState([]);
   const addToast = useCallback(
     ({ type, title, description }) => {
-      const id = uuid();
+
+      const id = uuidv4();
 
       const toast = {
         id,

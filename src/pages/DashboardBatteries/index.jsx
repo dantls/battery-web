@@ -64,7 +64,6 @@ export function DashboardBatteries() {
       service
     )
   })
-  console.log(formattedServicesBattery)
   return (
       <Container>
         <h1>Baterias</h1>

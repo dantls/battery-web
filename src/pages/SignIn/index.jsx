@@ -5,14 +5,11 @@ import { Link
   , useHistory 
 } from 'react-router-dom';
 
-
-
 import { FiLogIn } from 'react-icons/fi';
 
 import logoImg from '../../assets/logo.jpg';
 
-// import { useAuth } from '../../hooks/auth';
-// import { useToast } from '../../hooks/toast';
+import { useToast } from '../../hooks/toast';
 // import getValidationErrors from '../../utils/getValidationErrors';
 
 import { Container, Content, Background, AnimationContainer } from './styles';
@@ -24,13 +21,12 @@ export const SignIn = () => {
   const [password, setPassword] = useState('')
 
   const { signIn } = useAuth();
-  // const { addToast } = useToast();
+  const { addToast } = useToast();
 
   const handleSubmit = useCallback(
     async (event) => {
       event.preventDefault();
      try {
-       
         const schema = Yup.object().shape({
           email: Yup.string()
             .required('E-mail Obrigatório')
@@ -46,22 +42,26 @@ export const SignIn = () => {
           password
         });
 
-         history.push('/batteries/dashboard');
+     
+
+        history.push('/batteries/dashboard');
       } catch (error) {
         if (error instanceof Yup.ValidationError) {
-          // const errors = getValidationErrors(error);
 
+          // const errors = getValidationErrors(error);
+         
           return;
         }
-        // addToast({
-        //   type: 'error',
-        //   title: 'Erro na autenticação',
-        //   description:
-        //     'Ocorreu um erro ao fazer login, verifique as credenciais.',
-        // });
+        addToast({
+          type: 'error',
+          title: 'Erro na autenticação',
+          description:
+            'Ocorreu um erro ao fazer login, verifique as credenciais.',
+        });
+         
       }
     },
-    [ email, password , history, signIn],
+    [ email, password , history, signIn,addToast],
   );
   return (
     <Container>
