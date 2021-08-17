@@ -6,7 +6,6 @@ import { Container } from './styles';
 import { useTransition } from 'react-spring';
 
 
-
 const ToastContainer = ({ messages }) => {
 
   const transition = useTransition(messages, {

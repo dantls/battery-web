@@ -9,13 +9,13 @@ import {
 
 import { useToast } from '../../../hooks/toast';
 
-// import { Container } from './styles';
+import { Container } from './styles';
 
-// const icons = {
-//   info: <FiInfo size={24} />,
-//   error: <FiAlertCircle size={24} />,
-//   success: <FiCheckCircle size={24} />,
-// };
+const icons = {
+  info: <FiInfo size={24} />,
+  error: <FiAlertCircle size={24} />,
+  success: <FiCheckCircle size={24} />,
+};
 
 const Toast = ({ message, transition }) => {
   const { removeToast } = useToast();
@@ -23,38 +23,38 @@ const Toast = ({ message, transition }) => {
   useEffect(() => {
     const timer = setTimeout(() => {
       removeToast(message.id);
-    }, 3000);
+    }, 300000);
 
     return () => {
       clearTimeout(timer);
     };
   }, [removeToast, message.id]);
+
+
   const fragment = transition((style, item) => {
-    return <animated.div style={style}>{item.text}</animated.div>;
+    return (
+      
+         <Container
+            type={item.type}
+            hasdescription={Number(!!item.description)}
+            style={style}
+          >
+            {icons[item.type || 'info']}
+            <div>
+              <strong>{item.title}</strong>
+              {item.description && <p>{item.description}</p>}
+            </div>
+            <button onClick={() => removeToast(item.id)} type="button">
+              <FiXCircle size={18} />
+            </button>
+        </Container>
+    )
   });
-
- 
-
 
   return (
     <>
-      <div>{fragment}</div>
+      {fragment}
     </>
-
-    // <Container
-    //   type={message.type}
-    //   hasdescription={Number(!!message.description)}
-    //   style={style}
-    // >
-    //   {icons[message.type || 'info']}
-    //   <div>
-    //     <strong>{message.title}</strong>
-    //     {message.description && <p>{message.description}</p>}
-    //   </div>
-    //   <button onClick={() => removeToast(message.id)} type="button">
-    //     <FiXCircle size={18} />
-    //   </button>
-    // </Container>
   );
 };
 
