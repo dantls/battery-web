@@ -1,4 +1,4 @@
-import React, {useState,useEffect} from 'react';
+import React from 'react';
 import { 
   RiBattery2ChargeLine ,
   RiBattery2Fill,
@@ -7,69 +7,19 @@ import {
 
 import { Container } from './styles';
 
-import { api} from '../../services/api';
-import { formatDateElapsed } from '../../utils/formatDateElapsed';
-import { formatDate } from '../../utils/formatDate';
 import { useBattery } from '../../hooks/battery';
+import { useServicesBattery } from '../../hooks/servicesBattery';
 
 export function DashboardBatteries() {
   const {handleFinishBatteryCharge , handleChargeBattery} = useBattery()
-
-  const [servicesBattery, setServicesBattery] = useState([]);
-
-  useEffect(()=>{
-    api.get('batteries-services')
-    .then(
-      response => {setServicesBattery(response.data)
-      }
-      )
-  },[])
-
-  let elapsedDateBatteryService=null;
-  let elapsedDateService=null;
-  let passedDateBatteryService=null
-  let passedDateService=null
-
-  const formattedServicesBattery = servicesBattery.map(item => {
-    passedDateService=null
-    passedDateBatteryService=null
-    elapsedDateService=null;
-    elapsedDateBatteryService=null;
-
-    if(!!item.initial_date_battery_service){
-      passedDateBatteryService = new Date(item.initial_date_battery_service);
-      elapsedDateBatteryService = formatDateElapsed(passedDateBatteryService)
-    }
-    if(!!item.initial_date_service){
-      passedDateService = new Date(item.initial_date_service);
-      elapsedDateService = formatDateElapsed(passedDateService)
-    }
-
-    const service = {
-      ...item,
-
-      "initial_date_service": item.initial_date_service 
-        ? formatDate(item.initial_date_service)
-        : null,
-
-      elapsedDateService ,
-
-      "initial_date_battery_service": item.initial_date_battery_service 
-        ? formatDate(item.initial_date_battery_service)
-        : null,
-
-      elapsedDateBatteryService
-    }
-    return(
-      service
-    )
-  })
+  const {servicesBattery} = useServicesBattery()
+ 
   return (
       <Container>
         <h1>Baterias</h1>
 
         <ul>
-          {formattedServicesBattery.map(service => (
+          {servicesBattery.map(service => (
               <li key={service.battery_id}>
                 <div>
                   <div>
