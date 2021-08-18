@@ -17,45 +17,36 @@ const icons = {
   success: <FiCheckCircle size={24} />,
 };
 
-const Toast = ({ message, transition }) => {
+const Toast = ({ message,style }) => {
   const { removeToast } = useToast();
 
   useEffect(() => {
     const timer = setTimeout(() => {
       removeToast(message.id);
-    }, 300000);
+    }, 3000);
 
     return () => {
       clearTimeout(timer);
     };
   }, [removeToast, message.id]);
-
-
-  const fragment = transition((style, item) => {
+   
     return (
       
          <Container
-            type={item.type}
-            hasdescription={Number(!!item.description)}
+            type={message.type}
+            hasdescription={Number(!!message.description)}
             style={style}
           >
-            {icons[item.type || 'info']}
+            {icons[message.type || 'info']}
             <div>
-              <strong>{item.title}</strong>
-              {item.description && <p>{item.description}</p>}
+              <strong>{message.title}</strong>
+              {message.description && <p>{message.description}</p>}
             </div>
-            <button onClick={() => removeToast(item.id)} type="button">
+            <button onClick={() => removeToast(message.id)} type="button">
               <FiXCircle size={18} />
             </button>
         </Container>
     )
-  });
-
-  return (
-    <>
-      {fragment}
-    </>
-  );
 };
 
 export default Toast;

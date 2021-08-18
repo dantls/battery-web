@@ -5,23 +5,27 @@ import { Container } from './styles';
 
 import { useTransition } from 'react-spring';
 
-
 const ToastContainer = ({ messages }) => {
 
   const transition = useTransition(messages, {
-    from: { opacity: 0, marginLeft: -100, marginRight: 100 },
-    enter: { opacity: 1, marginLeft: 0, marginRight: 0 }
+      from: { right: '-120%', opacity: 0 },
+      enter: { right: '0%', opacity: 1 },
+      leave: { right: '-120%', opacity: 0 },
   });
  
-  return (
+  
+  const toast = transition((style, item) => {
+    return (
+      <Toast 
+        style={style}
+        message={item}
+      />
+    )
+  });
+
+   return (
     <Container>
-      { messages.map((message) => (
-        <Toast 
-          key={message.id} 
-          message={message} 
-          transition={transition}
-        />
-      ))}
+     {toast}
     </Container>
   );
 };

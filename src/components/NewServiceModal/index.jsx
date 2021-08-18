@@ -9,8 +9,6 @@ import { useHistory } from 'react-router';
 import { useModal } from '../../hooks/modal';
 Modal.setAppElement('#root');
 
-
-
 export function NewServiceModal(){
   const {isNewServiceModalOpen , handleCloseNewServiceModal} = useModal()
 
