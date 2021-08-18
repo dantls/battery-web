@@ -7,7 +7,7 @@ const BatteryContext = createContext();
 
 const BatteryProvider = ({children}) => {
   const [batteries, setBatteries] = useState([]);
-
+  
   useEffect(()=>{
     async function loadBatteries(){
       const response = await api.get(`/batteries`);
@@ -15,7 +15,6 @@ const BatteryProvider = ({children}) => {
     }
     loadBatteries();
   },[])
-
 
   const handleDelete = (id) => {
     Swal.fire({
@@ -67,7 +66,6 @@ const BatteryProvider = ({children}) => {
             );
         
             setBatteries([...batteriesUpdated]);
-    
           }
         );
 
@@ -101,7 +99,6 @@ const BatteryProvider = ({children}) => {
             );
         
             setBatteries([...batteriesUpdated]);
-    
           }
         );
 
@@ -111,6 +108,8 @@ const BatteryProvider = ({children}) => {
   };
 
 
+ 
+
 
   return (
     <BatteryContext.Provider value={{
@@ -118,7 +117,7 @@ const BatteryProvider = ({children}) => {
       handleChargeBattery, 
       handleDelete,
       handleFinishBatteryCharge
-      }}>
+    }}>
       {children}
     </BatteryContext.Provider>
   )

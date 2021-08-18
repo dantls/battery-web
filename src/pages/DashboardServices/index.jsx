@@ -1,40 +1,15 @@
-import React, {useState,useEffect} from 'react';
-
-import { api} from '../../services/api';
-
-import { formatDate } from '../../utils/formatDate';
-import { formatDateElapsed } from '../../utils/formatDateElapsed';
+import React from 'react';
 
 import { RiCloseFill } from 'react-icons/ri';
 import { Container } from './styles';
 import { useBattery } from '../../hooks/battery';
+import { useService } from '../../hooks/service';
 
 
 export function DashboardServices() {
-  const [services, setServices] = useState([]);
+  const {services} = useService()
   const {handleChargeBattery} = useBattery()
 
-
-  useEffect(()=>{
-    api.get('services')
-    .then(response => setServices(response.data))
-  },[])
-
-  const formattedServices = services.map(item => {
-    const passed = new Date(item.initial_date);
-
-    const elapsed = formatDateElapsed(passed)
-
-    const service = {
-      ...item,
-      "initial_date": formatDate(item.initial_date),
-      elapsed 
-    }
-    
-    return(
-      service
-    )
-  })
   
   // const [incidents, setIncidents] = useState([]);
 
@@ -78,7 +53,7 @@ export function DashboardServices() {
        <h1>Serviços em andamento</h1>
 
        <ul>
-        {formattedServices.map(service => (
+        {services.map(service => (
             <li key={service.id}>
               <div>
                 <div>
@@ -107,8 +82,8 @@ export function DashboardServices() {
 
               
               <button  type="button"
-              onClick={() => handleChargeBattery(service.battery_id)}>
-
+                onClick={() => handleChargeBattery(service.battery_id)}
+              >
                 <RiCloseFill size={20} color="#a8a8b3"/>
               </button>
             </li>
