@@ -7,12 +7,16 @@ import closeImg from '../../assets/close.svg'
 import { api } from '../../services/api';
 import { useHistory } from 'react-router';
 import { useModal } from '../../hooks/modal';
+import { useServicesBattery } from '../../hooks/servicesBattery';
+import { useService } from '../../hooks/service';
 Modal.setAppElement('#root');
 
 export function NewServiceModal(){
   const {isNewServiceModalOpen , handleCloseNewServiceModal} = useModal()
 
   const history = useHistory();
+  const { loadServicesBatteries } = useServicesBattery()
+  const { loadServices } = useService()
   
   const [devices ,setDevices] = useState([]);
   const [choiseDevice ,setChoiseDevice] = useState('');
@@ -26,6 +30,9 @@ export function NewServiceModal(){
          "device_id": choiseDevice,
          "battery_id": choiseBattery,
        });
+
+       await loadServicesBatteries();
+       await loadServices();
 
     history.push('/');
     handleCloseNewServiceModal()

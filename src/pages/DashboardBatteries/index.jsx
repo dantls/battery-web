@@ -12,7 +12,8 @@ import { useServicesBattery } from '../../hooks/servicesBattery';
 
 export function DashboardBatteries() {
   const {handleFinishBatteryCharge , handleChargeBattery} = useBattery()
-  const {servicesBattery} = useServicesBattery()
+  const {servicesBattery } = useServicesBattery()
+
  
   return (
       <Container>

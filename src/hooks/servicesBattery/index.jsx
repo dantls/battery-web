@@ -1,4 +1,4 @@
-import React, { createContext , useState, useEffect, useContext} from 'react';
+import React, { createContext , useState, useEffect, useContext, useCallback} from 'react';
 import {api} from '../../services/api';
 import { formatDateElapsed } from '../../utils/formatDateElapsed';
 import { formatDate } from '../../utils/formatDate';
@@ -10,13 +10,17 @@ const ServicesBatteryProvider = ({children}) => {
 
   const [services, setServices] = useState([]);
 
-  useEffect(()=>{
-    async function loadServicesBatteries(){
+  const loadServicesBatteries = useCallback(
+    async() => {
       const response = await api.get(`/batteries-services`);
       setServices(response.data)
-    }
+    },
+    [],
+  );
+
+  useEffect(()=>{
     loadServicesBatteries();
-  },[])
+  },[loadServicesBatteries])
 
   let elapsedDateBatteryService=null;
   let elapsedDateService=null;
@@ -60,7 +64,7 @@ const ServicesBatteryProvider = ({children}) => {
 
 
   return (
-    <ServicesBatteryContext.Provider value={{servicesBattery}}>
+    <ServicesBatteryContext.Provider value={{servicesBattery, loadServicesBatteries}}>
       {children}
     </ServicesBatteryContext.Provider>
   )

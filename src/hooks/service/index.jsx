@@ -1,4 +1,4 @@
-import React, { createContext , useState, useEffect, useContext} from 'react';
+import React, { createContext , useState, useEffect, useContext, useCallback} from 'react';
 import {api} from '../../services/api';
 import { formatDateElapsed } from '../../utils/formatDateElapsed';
 import { formatDate } from '../../utils/formatDate';
@@ -10,10 +10,17 @@ const ServiceProvider = ({children}) => {
 
   const [servicesState, setServicesState] = useState([]);
 
+  const loadServices = useCallback(
+    async() => {
+      const response = await api.get(`services`);
+      setServicesState(response.data)
+    },
+    [],
+  );
+
   useEffect(()=>{
-    api.get('services')
-    .then(response => setServicesState(response.data))
-  },[])
+    loadServices();
+  },[loadServices])
 
   const services = servicesState.map(item => {
     const passed = new Date(item.initial_date);
@@ -30,10 +37,8 @@ const ServiceProvider = ({children}) => {
       service
     )
   })
-
-
   return (
-    <ServiceContext.Provider value={{services}}>
+    <ServiceContext.Provider value={{services,loadServices}}>
       {children}
     </ServiceContext.Provider>
   )
@@ -43,7 +48,7 @@ function useService(){
   const context = useContext(ServiceContext)
   
   if(!context){
-    throw new Error('UseBattery deve ser utilizado com o BatteryProvider')
+    throw new Error('UseService deve ser utilizado com o BatteryProvider')
   }
 
   return context;

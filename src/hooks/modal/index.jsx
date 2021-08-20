@@ -6,7 +6,6 @@ const ModalProvider = ({children}) =>{
   const [isNewServiceModalOpen, setIsNewServiceModalOpen] = useState(false);
 
   function handleOpenNewServiceModal(){
-    console.log('Open')
     setIsNewServiceModalOpen(true);
   }
   function handleCloseNewServiceModal(){

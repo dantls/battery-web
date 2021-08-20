@@ -10,16 +10,18 @@ import { ServiceProvider } from './service/';
 const AppProvider= ({ children }) => (
   <AuthProvider>
      <ToastProvider>
-      <BatteryProvider>
+      
         <ServiceProvider>
           <ServicesBatteryProvider>
-            <ModalProvider>
-              {children}
-            </ModalProvider>
+            <BatteryProvider>
+              <ModalProvider>
+                {children}
+              </ModalProvider>
+            </BatteryProvider>
           </ServicesBatteryProvider>
         </ServiceProvider>
 
-      </BatteryProvider>
+      
     </ToastProvider>
   </AuthProvider>
 );
