@@ -46,7 +46,13 @@ export function DashboardBatteries() {
                 {
                   ( (service.status === 'Carregada') 
                     ?
-                      <button  type="button">
+                      <button  
+                        type="button"
+                        style={{
+                          opacity: 0.6,
+                          cursor: 'not-allowed'
+                        }}
+                      >
                         <RiBattery2Fill size={20} color="green"/>
                       </button>
                     : <></>
@@ -69,7 +75,13 @@ export function DashboardBatteries() {
                 {
                   ( (service.status === 'Em uso') 
                     ?
-                      <button  type="button">
+                      <button  
+                        type="button"
+                        style={{
+                          opacity: 0.6,
+                          cursor: 'not-allowed'
+                        }}
+                      >
                       <RiBatteryShareFill size={20} color="red"/>
                       </button>
                     : <></>
